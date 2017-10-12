@@ -1,11 +1,12 @@
 STU_BBS   
 This is a project for practicing website develop
 
-# push test 
+# push test
 this is a push test
 
-# Collaborators 
+# Collaborators
 yixin   
 zs	   
 liaojunyu   
-ffl	
+ffl
+liaojunyu GitHub客户端测试
