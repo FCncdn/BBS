@@ -1,0 +1,51 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">汕大郁金香</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#">首页</a></li>
+            <li><a href="#partition">分区</a></li>
+            <form class="navbar-form navbar-left">
+                {% csrf_token %}
+              <input type="text" class="form-control" placeholder="搜你想要的">
+              <button type = "submit" class = "btn btn-primary">搜索</button>
+            </form>
+
+          </ul>
+          <ul class="nav navbar-nav navbar-right nav-pills">
+            <!--<div class = "navbar-header">
+              <a class = "navbar-brand">
+                <li><img src = "picture/zwei_art.jpg/100x100" class = "img-thumbnail"></li>
+              </a>
+            </div>-->
+            <li>
+              <a href="#">评论回复
+                <span class = "badge">12</span>
+              </a>
+            </li>                                           <!--12、5 为评论回复数和悄悄话数显示，由badge类实现-->
+            <li>
+              <a href="#">悄悄话
+                <span class = "badge">5</span>
+              </a>
+            </li>
+            <li class="dropdown" >
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">(用户名)<span class="caret"></span></a>
+              <ul class="dropdown-menu" style = "text-align:center">
+                <li><a href="#">个人空间</a></li>                                <!--用户个人空间入口-->
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header"></li>
+                <li><a href="#">注销</a></li>                                   <!--注销功能-->
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>

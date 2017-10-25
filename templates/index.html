@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/static/icon/bbs1.png">
+    <title>汕大郁金香主页</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="/static/css/navbar-fixed-top.css" rel="stylesheet">
+    <script src="/static/js/ie-emulation-modes-warning.js"></script>
+
+  </head>
+   <body>
+    {% include "base.html" %}
+    <div class="container">
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>欢迎来到汕大郁金香论坛</h1>
+        <br>
+        <br>
+        <br>
+        <p></p>
+      </div>
+      <div class="page-header">
+        <h1>板块分区</h1>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title" style = "text-align:center"><a href = "">{{bbs_category_one.name}}</a></h3>
+            </div>
+            <div class="panel-body">
+            {% for bbs in bbs_list1|slice:":5"  %}
+			<a href="#">  {{bbs.title}}</a>
+			  <br>
+                <br>
+		  {%endfor%}
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title" style = "text-align:center"><a href = "">{{ bbs_category_two }} </a></h3>
+            </div>
+            <div class="panel-body">
+                 {% for bbs in bbs_list2|slice:":5" %}
+			    <a href="#">  {{bbs.title}}</a>
+			  <br>
+		  {%endfor%}
+            </div>
+          </div>
+        </div><!-- /.col-sm-4 -->
+        <div class="col-sm-4">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title" style = "text-align:center"><a href = "">{{bbs_category_three.name}}</a></h3>
+            </div>
+            <div class="panel-body">
+             {% for bbs in bbs_list3|slice:":5"  %}
+			<a href="#">  {{bbs.title}}</a>
+			  <br>
+		  {%endfor%}
+          </div>
+          </div>
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title" style = "text-align:center"><a href = "">{{bbs_category_four.name}}</a></h3>
+            </div>
+            <div class="panel-body">
+          {% for bbs in bbs_list4|slice:":5" %}
+			<a href="#">  {{bbs.title}}</a>
+			  <br>
+		  {%endfor%}
+            </div>
+          </div>
+        </div><!-- /.col-sm-4 -->
+        <div class="col-sm-4">
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+              <h3 class="panel-title" style = "text-align:center"><a href = "">{{bbs_category_five.name}}</a></h3>
+            </div>
+            <div class="panel-body">
+              {% for bbs in bbs_list5|slice:":5" %}
+			<a href="#">  {{bbs.title}}</a>
+			  <br>
+		  {%endfor%}
+            </div>
+          </div>
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+              <h3 class="panel-title" style = "text-align:center"><a href = "">{{bbs_category_six.name}}</a></h3>
+            </div>
+            <div class="panel-body">
+           {% for bbs in bbs_list6|slice:":5"  %}
+			<a href="#">  {{bbs.title}}</a>
+			  <br>
+		  {%endfor%}
+            </div>
+          </div>
+        </div><!-- /.col-sm-4 -->
+      </div>
+    </div> <!-- /container -->
+
+
+   <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script>window.jQuery || document.write('<script src="/static/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/ie10-viewport-bug-workaround.js"></script>
+
+  </body>
+</html>
