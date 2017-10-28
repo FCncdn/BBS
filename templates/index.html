@@ -7,28 +7,154 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="/static/icon/bbs1.png">
+    <link rel="icon" href="../static/icon/bbs1.png">
+
     <title>汕大郁金香主页</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/static/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-    <link href="/static/css/navbar-fixed-top.css" rel="stylesheet">
-    <script src="/static/js/ie-emulation-modes-warning.js"></script>
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/bootstrap-theme.min.css" rel="stylesheet">
 
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../static/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../static/css/navbar-fixed-top.css" rel="stylesheet">
+    <link href="../static/css/theme.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../static/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../static/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
   </head>
-   <body>
-    {% include "base.html" %}
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">汕大郁金香</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#">首页</a></li>
+            <li><a href="#partition">分区</a></li>
+            <form class="navbar-form navbar-left">
+              <input type="text" class="form-control" placeholder="搜你想要的">
+              <button type = "submit" class = "btn btn-primary">搜索</button>
+            </form>
+
+          </ul>
+          <ul class="nav navbar-nav navbar-right nav-pills">
+            <!--<div class = "navbar-header">
+              <a class = "navbar-brand">
+                <li><img src = "picture/zwei_art.jpg/100x100" class = "img-thumbnail"></li>
+              </a>
+            </div>-->
+
+
+            <li class="dropdown" >
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">消息提醒<span class="caret"></span></a>
+              <ul class="dropdown-menu" style = "text-align:center">
+                <li>
+                  <a href="#">评论回复
+                    <span class = "badge">12</span>
+                  </a>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header"></li>
+                <li>
+                  <a href="#">悄悄话
+                    <span class = "badge">5</span>                <!--12、5、19 为评论回复数和悄悄话数显示，由badge类实现-->
+                  </a>
+                </li>
+                <li role = "seperator" class = "divider"</li>
+                <li>
+                  <a href = "#">被赞
+                    <span class = "badge">19</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!--li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li-->
+            <li class="dropdown" >
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">(用户名)<span class="caret"></span></a>
+              <ul class="dropdown-menu" style = "text-align:center">
+                <li><a href="#">个人空间</a></li>                                <!--用户个人空间入口-->
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header"></li>
+                <li><a href="#">注销</a></li>                                   <!--注销功能-->
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
     <div class="container">
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h1>欢迎来到汕大郁金香论坛</h1>
         <br>
-        <br>
-        <br>
-        <p></p>
       </div>
+
+      <div class="page-header">
+        <h1></h1>
+      </div>
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">                 <!--图片滚动播放，图片宽度最好在1200px以上且每张图片的高宽比保持一致-->
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+          <div class="item active">
+            <img src="../static/picture/hyouka5.jpg" alt="Hyouka">
+          </div>
+          <div class="item">
+            <img src="../static/picture/hyouka2.jpg" alt="Second slide">
+          </div>
+          <div class="item">
+            <img src="../static/picture/hyouka3.jpg" alt="Third slide">
+          </div>
+          <div class="item">
+            <img src="../static/picture/hyouka6.jpg" alt="Hyouka">
+          </div>
+          <div class="item">
+            <img src="../static/picture/hyouka7.jpg" alt="Hyouka">
+          </div>
+        </div>
+        <a class="carousel-control left" href="#carousel-example-generic"
+           data-slide="prev">&lsaquo;
+        </a>
+        <a class="carousel-control right" href="#carousel-example-generic"
+           data-slide="next">&rsaquo;
+        </a>
+        <!--<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>-->
+      </div>
+
       <div class="page-header">
         <h1>板块分区</h1>
       </div>
@@ -36,73 +162,72 @@
         <div class="col-sm-4">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title" style = "text-align:center"><a href = "">{{bbs_category_one.name}}</a></h3>
+              <h3 class="panel-title" style = "text-align:center"><a href = "">生活区 </a></h3>
             </div>
             <div class="panel-body">
-            {% for bbs in bbs_list1|slice:":5"  %}
-			<a href="#">  {{bbs.title}}</a>
-			  <br>
-                <br>
-		  {%endfor%}
+              帖子1<br>
+              帖子2<br>
+              帖子3<br>
+              帖子4<br>
             </div>
           </div>
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title" style = "text-align:center"><a href = "">{{ bbs_category_two }} </a></h3>
+              <h3 class="panel-title" style = "text-align:center"><a href = "">学习区</a></h3>
             </div>
             <div class="panel-body">
-                 {% for bbs in bbs_list2|slice:":5" %}
-			    <a href="#">  {{bbs.title}}</a>
-			  <br>
-		  {%endfor%}
+              帖子1<br>
+              帖子2<br>
+              帖子3<br>
+              帖子4<br>
             </div>
           </div>
         </div><!-- /.col-sm-4 -->
         <div class="col-sm-4">
           <div class="panel panel-primary">
             <div class="panel-heading">
-              <h3 class="panel-title" style = "text-align:center"><a href = "">{{bbs_category_three.name}}</a></h3>
+              <h3 class="panel-title" style = "text-align:center"><a href = "">闲聊区</a></h3>
             </div>
             <div class="panel-body">
-             {% for bbs in bbs_list3|slice:":5"  %}
-			<a href="#">  {{bbs.title}}</a>
-			  <br>
-		  {%endfor%}
-          </div>
+              帖子1<br>
+              帖子2<br>
+              帖子3<br>
+              帖子4<br>
+            </div>
           </div>
           <div class="panel panel-primary">
             <div class="panel-heading">
-              <h3 class="panel-title" style = "text-align:center"><a href = "">{{bbs_category_four.name}}</a></h3>
+              <h3 class="panel-title" style = "text-align:center"><a href = "">二手交易区</a></h3>
             </div>
             <div class="panel-body">
-          {% for bbs in bbs_list4|slice:":5" %}
-			<a href="#">  {{bbs.title}}</a>
-			  <br>
-		  {%endfor%}
+              帖子1<br>
+              帖子2<br>
+              帖子3<br>
+              帖子4<br>
             </div>
           </div>
         </div><!-- /.col-sm-4 -->
         <div class="col-sm-4">
           <div class="panel panel-warning">
             <div class="panel-heading">
-              <h3 class="panel-title" style = "text-align:center"><a href = "">{{bbs_category_five.name}}</a></h3>
+              <h3 class="panel-title" style = "text-align:center"><a href = "">交流区</a></h3>
             </div>
             <div class="panel-body">
-              {% for bbs in bbs_list5|slice:":5" %}
-			<a href="#">  {{bbs.title}}</a>
-			  <br>
-		  {%endfor%}
+              帖子1<br>
+              帖子2<br>
+              帖子3<br>
+              帖子4<br>
             </div>
           </div>
           <div class="panel panel-warning">
             <div class="panel-heading">
-              <h3 class="panel-title" style = "text-align:center"><a href = "">{{bbs_category_six.name}}</a></h3>
+              <h3 class="panel-title" style = "text-align:center"><a href = "">爱啥啥区</a></h3>
             </div>
             <div class="panel-body">
-           {% for bbs in bbs_list6|slice:":5"  %}
-			<a href="#">  {{bbs.title}}</a>
-			  <br>
-		  {%endfor%}
+              帖子1<br>
+              帖子2<br>
+              帖子3<br>
+              帖子4<br>
             </div>
           </div>
         </div><!-- /.col-sm-4 -->
@@ -110,12 +235,18 @@
     </div> <!-- /container -->
 
 
-   <!-- Bootstrap core JavaScript
+
+
+
+
+    <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script>window.jQuery || document.write('<script src="/static/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="/static/js/bootstrap.min.js"></script>
-    <script src="/static/js/ie10-viewport-bug-workaround.js"></script>
-
+    <script src="https://cdn.bootcss.com/jquery/1.12.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../static/js/jquery.min.js"><\/script>')</script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/docs.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../static/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
