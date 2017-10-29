@@ -24,3 +24,7 @@ def index(request):
     bbs_category_six = models.Category.objects.get(id='6')
     bbs_categories = models.Category.objects.all()
     return render_to_response('index.html', locals())
+
+def article(request,article_id):
+    article = models.Article.objects.get(id=article_id)
+    return render_to_response('article.html', locals())
