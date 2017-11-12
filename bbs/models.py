@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 class Article(models.Model):
@@ -77,8 +78,12 @@ class UserProfile(models.Model):
     # 头像
     photo = models.ImageField(upload_to="upload_imgs/", default='upload_imgs/user-1.jpg')
 
-    def __unicode__(self):
+    def __str__(self):      #__unicode__ in pyhton2
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse("personalProfile:personalProfileMain", args=[str(self.pk)])
+    
 
 
 class UserGroup(models.Model):

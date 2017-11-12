@@ -25,11 +25,11 @@ SECRET_KEY = '3r(=50wdn(w@9*78gm+3=cq!n-#n+ku5rcy5%ega@f%g=e)ud^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-
+#django build-in app
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,8 +40,12 @@ INSTALLED_APPS = [
     'bbs',
     'django.contrib.sites',
     'django_comments'
-
 ]
+#custom app
+INSTALLED_APPS += [
+    'personalProfile',
+]
+
 SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

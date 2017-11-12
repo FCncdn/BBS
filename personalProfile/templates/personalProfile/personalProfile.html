@@ -1,0 +1,464 @@
+{% extends "base.html" %}
+{% block title %}
+Personal homepage
+{% endblock title %}
+
+{% block extraHeadJs %}
+{% load static %}
+<script src="{% static 'js/holder.min.js' %}"></script>
+{% endblock extraHeadJs %}
+
+{% block style %}
+    .person .row {
+        padding-top:80px;
+        margin-left: 20px;
+    }
+    .person .main .main-top {
+        margin-bottom: 20px;
+    }
+    .name {
+        display: inline;
+        font-size: 21px;
+        font-weight: 700;
+        vertical-align: middle;
+
+    }
+    .person .main .main-top .name {
+
+        padding-left:20px;
+        color:#222;
+    }
+    .person .main-top .avatar {
+        float: left;
+        width: 80px;
+        height: 80px;
+        margin-left: -2px;
+    }
+    .col-xs-16{
+        width:60%;
+        float:left;
+    }
+    .list-container .note-list li{
+        display:inline-block;
+    }
+    .col-xs-offset-1 {
+        margin-left: 4.16667%;
+    }
+    .col-xs-7 {
+        width: 29.16667%;
+    }
+    .function-btn {
+        color: #2f2f2f;
+        float:right;
+    }
+    .person .aside .title{
+        padding-bottom:10px;
+    }
+    .person .aside .description{
+        position: relative;
+        margin-bottom: 16px;
+        padding: 0 0 16px;
+        text-align: left;
+        font-size: 0;
+        border-bottom: 1px solid #f0f0f0;
+        clear: both;
+        word-break: break-word!important;
+        word-break: break-all;
+    }
+    .person .aside .description .js-intro{
+        margin-bottom: 10px;
+        line-height: 20px;
+        font-size: 14px;
+    }
+    .person .aside .user-dynamic{
+        padding-bottom: 6px;
+
+    }
+    .person .aside .list {
+        margin-bottom: 16px;
+        padding-bottom: 16px;
+        list-style: none;
+        border-bottom: 1px solid #f0f0f0;
+        clear: both;
+    }
+
+    .person .aside .user-dynamic a {
+        font-size: 14px;
+        color: #333;
+        line-height: 30px;
+    }
+    .person .aside .new-collection-btn {
+        font-size: 13px;
+        color: #42c02e;
+    }
+    .person .aside .list li {
+        margin-bottom: 10px;
+    }
+
+    .person .aside .list li a {
+        display: inline-block;
+    }
+    .person .aside .avatar-collection {
+        margin-right: 5px;
+        width: 32px;
+        height: 32px;
+    }
+    .avatar-collection img {
+        width: 100%;
+        height: 100%;
+        border: 1px solid #ddd;
+        border-radius: 10%;
+    }
+
+    .person .aside .name {
+        position: relative;
+        max-width: 176px;
+        vertical-align: middle;
+        top: 1px;
+        font-size: 14px;
+        color: #333;
+    }
+    .note-list-a {
+        position: relative;
+        width: 100%;
+        margin: 0 0 17px;
+        padding: 0 2px 17px 0;
+        border-bottom: 1px solid #f0f0f0;
+        word-wrap: break-word;
+    }
+    .trigger-menu {
+        margin-bottom: 20px;
+        border-bottom: 1px solid #f0f0f0;
+
+    }
+    .trigger-menu li {
+        position: relative;
+        display: inline-block;
+        padding: 8px 0;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    .note-list .abstract {
+        margin: 0 0 8px;
+        font-size: 13px;
+        line-height: 24px;
+    }
+{% endblock style %}
+
+{% block body %}
+<div class="container">
+    <!--
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="" class="navbar-brand"><img src="stu-logo-new.png" width="80"></a>
+                <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mynavbar"  >
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+
+            </div>
+
+            <div id="mynavbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav pull-right">
+                    <li class="dropdown">
+                        <a href="" class="drop-toggle" data-toggle="dropdown">
+                        <span><img src="logo2.png" width="30"><span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li ><a href=""><span class="glyphicon glyphicon-user"></span> 我的主页</a></li>
+                            <li><a href=""><span class="glyphicon glyphicon-bookmark"></span> 收藏的文章</a></li>
+                            <li><a href=""><span class="glyphicon glyphicon-heart"></span> 喜欢的文章</a></li>
+                            <li><a href=""><span class="glyphicon glyphicon-cog"></span> 设置</a></li>
+                            <li><a href=""><span class="glyphicon glyphicon-question-sign"></span> 帮助与反馈></a></li>
+                            <li><a href=""><span class="glyphicon glyphicon-log-out"></span> 退出</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="">
+                            <span class="glyphicon glyphicon-eye-open" ></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="glyphicon glyphicon-bell"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">关注</a>
+                    </li>
+                    <li>
+                        <a class="style-model-btn"><span class="glyphicon glyphicon-text-size"></span></a>
+                    </li>
+                    <li>
+                        <a href=""><span class="glyphicon glyphicon-leaf"></span>写文章</a>
+                    </li>
+                </ul>
+
+                <form action="" class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-warning"><span class="glyphicon glyphicon-search"></span></button>
+                    </div>
+                </form>
+
+            </div>
+
+
+        </div>
+    </nav> -->
+
+    <div class="person container">
+        <div class="row">
+
+            <div class="col-xs-16 main">
+                <div class="main-top">
+                    <a class="avatar" href=""><img src="#" alt="headImage-240"></a>
+                    <div class="title">
+                        <a class="name" href="">{{ userObject.name }}</a>
+                    </div>
+                    
+                    <!-- profile setting  -->
+                    <div>
+                        <a href="{% url 'personalProfile:personalProgileSetting' userObject.pk %}">edit</a>
+                    </div>
+
+
+
+                    <div class="infor">
+                        <ul class="nav navbar-nav">
+                            <li >
+
+                                <a class="n-data-a" href="" >关注<p class="n-data-b">model.follow</p></a>
+                            </li>
+                            <li>
+                                <a class="n-data-a" href="">粉丝<p class="n-data-b">model.follorwer</p></a>
+                            </li>
+                            <li>
+                                <a class="n-data-a" href="">文章<p class="n-data-b">model.article.num</p></a>
+                            </li>
+                            <li>
+                                <a class="n-data-a" href="">收获喜欢<p class="n-data-b">model.like.num</p></a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-16 main2">
+                            <div class="trigger-menu">
+                                <ul class="nav navbar-nav" data-pjax-container="#list-container">
+                                    <li class="active">
+                                        <a href=""><span class="glyphicon glyphicon-list-alt"></span>文章</a>
+                                    </li>
+                                    <li class>
+                                        <a href=""><span class="glyphicon glyphicon-bell"></span>动态</a>
+                                    </li>
+
+                                    <li>
+                                        <a href=""><span class="glyphicon glyphicon-bookmark"></span>收藏夹</a>
+                                    </li>
+                                    <li>
+                                        <a href=""><span class="glyphicon glyphicon-fire"></span>热门</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-container">
+
+                        <!--文章列表模块-->
+                        <ul class="note-list" infinite-scroll-url="">
+                            <li class="note-list-a">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <div class="media-object">
+                                            <a href=""><img src="holder.js/60x60" alt=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="media-heading">
+                                            <div class="name2">
+                                                <a href="">name</a>
+                                                <span class="times">publish-date</span>
+                                            </div>
+                                            <a href="">???</a>
+
+                                            <p class="abstract">
+                                                publish-content
+                                            </p>
+                                        </div>
+                                        <div class="footer">
+                                            <div class="trigger-menu22">
+                                                <ul class="nav navbar-nav" data-pjax-container="#list-container">
+
+
+                                                    <li class="active">
+                                                        <a href=""><span class="glyphicon glyphicon-eye-open"></span><b>watch-num</b></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href=""><span class="glyphicon glyphicon-comment"></span><b>comment-num</b></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href=""><span class="glyphicon glyphicon-thumbs-up"></span><b>like-num</b></a>
+
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="note-list-a">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <div class="media-object">
+                                            <a href=""><img src="holder.js/60x60" alt=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="media-heading">
+                                            <div class="name2">
+                                                <a href="">二哈</a>
+                                                <span class="times">5天前</span>
+                                            </div>
+                                            <a href="">6666666</a>
+
+                                            <p class="abstract">I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;</p>
+                                        </div>
+                                        <div class="footer">
+                                            <div class="trigger-menu22">
+
+
+                                                <ul class="nav navbar-nav" data-pjax-container="#list-container">
+
+
+                                                    <li class="active">
+                                                        <a href=""><span class="glyphicon glyphicon-eye-open"></span><b>11000</b></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href=""><span class="glyphicon glyphicon-comment"></span><b>52</b></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href=""><span class="glyphicon glyphicon-thumbs-up"></span><b>11</b></a>
+
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="note-list-a">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <div class="media-object">
+                                            <a href=""><img src="holder.js/60x60" alt=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="media-heading">
+                                            <div class="name2">
+                                                <a href="">二哈</a>
+                                                <span class="times">5天前</span>
+                                            </div>
+                                            <a href="">6666666</a>
+
+                                            <p class="abstract">I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;</p>
+                                        </div>
+                                        <div class="footer">
+                                            <div class="trigger-menu22">
+
+
+                                                <ul class="nav navbar-nav" data-pjax-container="#list-container">
+
+
+                                                    <li class="active">
+                                                        <a href=""><span class="glyphicon glyphicon-eye-open"></span><b>11000</b></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href=""><span class="glyphicon glyphicon-comment"></span><b>52</b></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href=""><span class="glyphicon glyphicon-thumbs-up"></span><b>11</b></a>
+
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xs-7 col-xs-offset-1 aside">
+                <div class="title">
+                    个人介绍
+                    <a class="function-btn" href=""><span class="glyphicon glyphicon-edit"></span>编辑</a>
+                </div>
+                <div class="description">
+                    <div class="js-intro" style="display: block;">model.个人介绍</div>
+                </div>
+                <ul class="list user-dynamic">
+                    <li>
+                        <a href=""><span class="glyphicon glyphicon-th-large"></span>  我关注的专题</a>
+                    </li>
+                    <li>
+                        <a href=""><span class="glyphicon glyphicon-heart-empty"></span> 我喜欢的内容</a>
+                    </li>
+                </ul>
+
+
+                <!--专题-->
+                <div>
+                    <div>
+                        <div class="title">
+                            我创建的专题
+                            <a href="" class="function-btn new-collection-btn" ><span class="glyphicon glyphicon-plus"></span>新建专题</a>
+                        </div>
+
+
+                        <ul class="list">
+                            <li>
+                                <a href="" target="_blank" class="avatar-collection"><img src="#" alt="Image"></a>
+                                <a href="" target="_blank" class="name">model.subjectName</a>
+                            </li>
+                            <li>
+                                <!---->
+                                <!---->
+                            </li>
+                        </ul>
+
+
+
+                    </div>
+                    <div class="title">
+                        我的日记
+                    </div>
+                    <ul class="list">
+                        <li>
+                            <a href="" target="_blank" ></a>
+                            <a hreff="" target="_blank" class="name"><span class="glyphicon glyphicon-book"></span> model.diaryName</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
