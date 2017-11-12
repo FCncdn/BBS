@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from django.shortcuts import render_to_response
-from .import models
+from . import models
 
 
 # Create your views here.
@@ -22,9 +22,15 @@ def index(request):
     bbs_category_four = models.Category.objects.get(id='4')
     bbs_category_five = models.Category.objects.get(id='5')
     bbs_category_six = models.Category.objects.get(id='6')
-    bbs_categories = models.Category.objects.all()
     return render_to_response('index.html', locals())
 
-def article(request,article_id):
-    article = models.Article.objects.get(id=article_id)
+
+def article(request, article_id):
+    article_obj = models.Article.objects.get(id=article_id)
     return render_to_response('article.html', locals())
+
+
+def partition(request, category_id):
+    partition_obj = models.Category.objects.get(id=category_id)
+    bbs_list = models.Article.objects.filter(category_id=category_id)
+    return render_to_response('partition.html', locals())
