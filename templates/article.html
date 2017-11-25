@@ -12,6 +12,9 @@
             word-wrap:break-word;
             word-break:break-all;
         }
+            textarea{
+            resize:none;
+        }
 {% endblock %}
 {% block body %}
     {% load comments %}
@@ -72,11 +75,11 @@
     <div class="border" style=" width:100%; float:left">
         <h6 style="text-align:right">{{comment.submit_date}}</h6>
     </div>
-</div><!--container-->
-
-{%endfor%}
 </div>
 
+{%endfor%}
+    </div><!--bs-example-->
+</div><!--container-->
 
 
     <div class="container">
