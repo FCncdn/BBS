@@ -14,6 +14,11 @@ class personalProfileDetail(DetailView):
 
     def get_queryset(self):
         return UserProfile.objects.filter(pk=self.kwargs['pk'])
+    
+    def get_context_data(self, **kwargs):
+        context = super(personalProfileDetail, self).get_context_data(**kwargs)
+        context['user'] = UserProfile
+        return context
 
 
 def personalProfileSetting(request, pk):
