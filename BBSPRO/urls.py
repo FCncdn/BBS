@@ -16,12 +16,17 @@ Including another URLconf
 
 from django.conf.urls import url,include
 from django.contrib import admin
-from bbs import views as mybbs
 from bbs import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', mybbs.index),
+    url(r'^$', views.index),
     url(r'^article/(?P<article_id>[0-9]+)$', views.article),
+    url(r'^partition/(?P<category_id>[0-9])$', views.partition),
+    url(r'^article_post/', views.article_post),
+    url(r'^login/$', views.login),
+    url(r'^acc_login/$', views.acc_login),
+    url(r'^logout/$', views.logout_view),
+
 ]
 
 #custom app

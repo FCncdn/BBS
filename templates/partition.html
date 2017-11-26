@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ partition_obj.name}}
+{% endblock %}
+{% block style %}
+        .border{
+            border:0px solid #ffffff;
+        }
+        p{
+            white-space:pre-wrap;
+            word-wrap:break-word;
+            word-break:break-all;
+        }
+        #hrs{
+            margin:0px;
+        }
+{% endblock %}
+{% block body %}
+    {% load comments %}
+    <div class="container">
+    <div class="bs-example">
+        <div class="container">
+            <ol class="breadcrumb" style="background-color:#ffffff">
+                <li><a href="/">首页</a></li>
+                <li class="active">{{ partition_obj.name}}</li>
+            </ol>
+
+        </div>
+        <hr id="hrs">
+        <br>
+        <div class="container" style="background-color:#edf1f4">
+            <div>
+                <div class="border" style="width:70%; float:left;">
+                    <h5>主题</h5>
+                </div>
+                <div class="border" style="width:10%; float:left;">
+                    <h5>作者</h5>
+                </div>
+                <div class="border" style="width:10%; float:left;">
+                    <h5>浏览量/回复数</h5>
+                </div>
+                <div class="border" style="width:10%; float:left;">
+                    <h5>发表于</h5>
+                </div>
+            </div>
+        </div>
+        {% for article in bbs_list %}
+            {% get_comment_count for article as comment_count %}
+        <div class="container">
+            <div>
+                <div class="border" style="width:70%; float:left;">
+                    <h5><a href="/article/{{ article.id }}">{{ article.title }}</a></h5>
+                </div>
+                <div class="border" style="width:10%; float:left;">
+                    <h5><a href="#">{{ article.author }}</a></h5>
+                </div>
+                <div class="border" style="width:10%; float:left;">
+                    <h5>{{ article.view_count }}/{{ comment_count }}</h5>
+                </div>
+                <div class="border" style="width:10%; float:left;">
+                    <h5>{{ article.publish_date }}</h5>
+                </div>
+            </div>
+        </div>
+        <hr id="hrs">
+     {% endfor %}
+    </div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li class="disabled">
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>                  <!--class="disabled"为不可选取状态，active为已选取（当前页面）状态-->
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li>
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+{% endblock %}

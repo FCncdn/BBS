@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
+
 {% block title %}
-{{ article.title }}
+{{ article_obj.title }}
 {% endblock %}
 {% block style %}
         .border{
@@ -11,21 +12,34 @@
             word-wrap:break-word;
             word-break:break-all;
         }
+            textarea{
+            resize:none;
+        }
 {% endblock %}
 {% block body %}
-    <div class="container" style="background-color:#ffffff">
+    {% load comments %}
+    {% get_comment_count for article_obj as comment_count %}
+    {% get_comment_list for article_obj as comment_list   %}
+<div class="container">
+    <div class="bs-example">
+    <div class="container">
+                <ol class="breadcrumb" style="background-color:#ffffff">
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/partition/{{ article_obj.category_id }}">{{ article_obj.category }}</a></li>
+                    <li class="active">{{ article_obj.title }}</li>
+            </ol>
     <hr>
-    <h3 style="margin-left:225px"><b>{{ article.title }}</b></h3>
+    <h3 style="margin-left:215px"><b>{{ article_obj.title }}</b></h3>
     <div>
         <div class="border" style="width:20%; text-align:center; float:left; min-height:150px;">
             <br>
             <a href="#"><img src="/static/picture/zwei_art.jpg" alt="个人头像" class="img-rounded" style="height:80px; width:80px;"></a>
             <br>
-            <a href="#"><h5 align="center">{{ article.author }}</h5></a>
+            <a href="#"><h5 align="center">{{ article_obj.author }}</h5></a>
         </div>
         <div class="border" style="width:80%; float:left; min-height:150px;">
             <br>
-            <p>{{ article.content }}</p>
+            <p>{{ article_obj.content }}</p>
         </div>
     </div>
 
@@ -34,32 +48,31 @@
     <br>
     <br>
     <div class="border" style=" width:100%; float:left">
-        <h6 style="text-align:right">{{ article.publish_date }}</h6>
+        <h6 style="text-align:right">{{ article_obj.publish_date }}</h6>
     </div>
+        <br>
+        <br>
+
 </div><!--container-->
 
-<div class="container" style="background-color:#ffffff">
+{%for comment in comment_list%}
+  <div class="container" style="background-color:#ffffff">
     <hr>
     <div>
         <div class="border" style="width:20%; text-align:center; float:left; min-height:150px;">
             <br>
-            <a href="#"><img src="../static/picture/zwei_art.jpg" alt="个人头像" class="img-rounded" style="height:80px; width:80px;"></a>
+            <a href="#"><img src="/static/picture/zwei_art.jpg" alt="个人头像" class="img-rounded" style="height:80px; width:80px;"></a>
             <br>
-            <a href="#"><h5>(用户名)</h5></a>
+            <a href="#"><h5>{{comment.name}} </h5></a>
         </div>
         <div class="border" style="width:80%; float:left; min-height:150px;">
 <p>
-说得对！！黄牛活该。
+    {{comment.comment|safe}}
 </p>                <!--注意！！！在获取评论时，表达式要紧贴左边线，不要在前面加任何缩进和空格，有的话就删掉-->
         </div>
     </div>
-    <br>
-    <br>
-    <div class="border" style=" width:100%; float:left">
-        <h6 style="text-align:right">(评论时间)</h6>
-    </div>
-</div><!--container-->
 
+<<<<<<< HEAD
 <div class="container" style="background-color:#ffffff">
     <hr>
     <div>
@@ -77,11 +90,14 @@
     </div>
     <br>
     <br>
+=======
+>>>>>>> 1f31bd05aa571117807c7a597b84f524adcd87cb
     <div class="border" style=" width:100%; float:left">
-        <h6 style="text-align:right">(评论时间)</h6>
+        <h6 style="text-align:right">{{comment.submit_date}}</h6>
     </div>
-</div><!--container-->
+</div>
 
+<<<<<<< HEAD
 <div class="container" style="background-color:#ffffff">
     <hr>
     <div>
@@ -102,56 +118,15 @@
     <div class="border" style=" width:100%; float:left">
         <h6 style="text-align:right">(评论时间)</h6>
     </div>
-</div><!--container-->
-
-<div class="container" style="background-color:#ffffff">
-    <hr>
-    <div>
-        <div class="border" style="width:20%; text-align:center; float:left; min-height:150px;">
-            <br>
-            <a href="#"><img src="../static/picture/zwei_art.jpg" alt="个人头像" class="img-rounded" style="height:80px; width:80px;"></a>
-            <br>
-            <a href="#"><h5>(用户名)</h5></a>
-        </div>
-        <div class="border" style="width:80%; float:left; min-height:150px;">
-            <p>
-说得对！！黄牛活该。
-            </p>                <!--注意！！！在获取评论时，表达式要紧贴左边线，不要在前面加任何缩进和空格，有的话就删掉-->
-        </div>
-    </div>
-    <br>
-    <br>
-    <div class="border" style=" width:100%; float:left">
-        <h6 style="text-align:right">(评论时间)</h6>
-    </div>
-</div><!--container-->
-
-<div class="container" style="background-color:#ffffff">
-    <hr>
-    <div>
-        <div class="border" style="width:20%; text-align:center; float:left; min-height:150px;">
-            <br>
-            <a href="#"><img src="../static/picture/zwei_art.jpg" alt="个人头像" class="img-rounded" style="height:80px; width:80px;"></a>
-            <br>
-            <a href="#"><h5>(用户名)</h5></a>
-        </div>
-        <div class="border" style="width:80%; float:left; min-height:150px;">
-            <p>
-说得对！！黄牛活该。
-            </p>                <!--注意！！！在获取评论时，表达式要紧贴左边线，不要在前面加任何缩进和空格，有的话就删掉-->
-        </div>
-    </div>
-    <br>
-    <br>
-    <div class="border" style=" width:100%; float:left">
-        <h6 style="text-align:right">(评论时间)</h6>
-    </div>
+=======
+{%endfor%}
+    </div><!--bs-example-->
+>>>>>>> 1f31bd05aa571117807c7a597b84f524adcd87cb
 </div><!--container-->
 
 
-
-    <hr>
     <div class="container">
+    <h6>共有 {{ comment_count }} 条评论.</h6>
         <nav aria-label="Page navigation">
             <ul class="pagination">
                 <li class="disabled">
@@ -178,8 +153,8 @@
             <br>
             <button class="btn btn-info" type="submit" style="float:right">评论回复</button>
         </div>
-
     </div><!--container-->
+
 {% endblock %}
 
 

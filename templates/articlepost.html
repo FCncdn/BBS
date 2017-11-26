@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}
+  发表新的帖子
+{% endblock %}
+{% block style %}
+        .border{
+            border:0px solid #ffffff;
+        }
+        p{
+            white-space:pre-wrap;
+            word-wrap:break-word;
+            word-break:break-all;
+        }
+        #hrs{
+            margin:0px;
+        }
+        body{
+            background-color:#edf1f4;
+        }
+        textarea{
+                resize:none;
+        }
+        #title{
+               width:30%;
+        }
+{% endblock %}
+{% block body %}
+
+
+<div class="container">
+    <div class="bs-example">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="active">发表帖子</li>
+            </ol>
+        </div>
+        <hr>
+        <br>
+
+        <div class="container">
+            <form>
+                <div class="form-group" style="width:30%">
+                    <label for="partition">板块分区</label>
+                    <select class="form-control" id="partition">
+                        <option>分区1</option>
+                        <option>分区2</option>
+                        <option>分区3</option>
+                        <option>分区4</option>
+                        <option>分区5</option>
+                        <option>分区6</option>
+                    </select>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="title">标题</label>
+                    <input type="text" class="form-control" id="title" placeholder="请输入标题">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="post">文章</label>
+                    <textarea rows="10" class="form-control" id="post" placeholder="拿起键盘就是写！"></textarea>
+                </div>
+                <br>
+
+                <button class="btn btn-info" type="submit" style="float:right">发表</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
