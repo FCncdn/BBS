@@ -67,6 +67,12 @@ class Category(models.Model):
         return self.name
 
 
+def user_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    filename = "headImage"
+    return 'user_{0}/{1}'.format(instance.user.id, filename)
+
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     # 名字
@@ -76,14 +82,14 @@ class UserProfile(models.Model):
     # 签名
     signature = models.CharField(max_length=128, default='This guy is too lazy to leave anything here.')
     # 头像
-    photo = models.ImageField(upload_to="upload_imgs/", default='upload_imgs/user-1.jpg')
+    photo = models.ImageField(upload_to=user_directory_path, default='upload_imgs/user-1.jpg')
 
     def __str__(self):      #__unicode__ in pyhton2
         return self.name
     
     def get_absolute_url(self):
         return reverse("personalProfile:personalProfileMain", args=[str(self.pk)])
-    
+
 
 
 class UserGroup(models.Model):
