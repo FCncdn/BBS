@@ -7,20 +7,12 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-<<<<<<< HEAD
-
-    {% load static %}  
-
-    <link rel="icon" href="{% static 'icon/bbs1.png' %}">
-=======
       {% load static %}
     <link rel="icon" href="{% static 'icon/bbs1.png' %}">
 
     <title>{% block title %}
->>>>>>> 1f31bd05aa571117807c7a597b84f524adcd87cb
 
-    <title>{% block title %}{% endblock %}</title>
-
+    {% endblock %}</title>
     <style>
         {% block style %}
         {% endblock %}
@@ -28,7 +20,6 @@
 
     {% block extraHeadJs %}{% endblock extraHeadJs %}
     {% block extraHeadCss %}{% endblock extraHeadCss %}
-
     <!-- Bootstrap core CSS -->
     <link href="{%static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{%static 'css/bootstrap-theme.min.css' %}" rel="stylesheet">
@@ -55,23 +46,23 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">汕大郁金香</a>
+          <a class="navbar-brand" href="#">BBS-TEST</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="/">首页</a></li>
             <li><a href="#">分区</a></li>
-            <li><a href="#">发帖</a></li>
+            <li><a href="/sub_page/">发帖</a></li>
             <form class="navbar-form navbar-left">
               <input type="text" class="form-control" placeholder="搜你想要的">
               <button type = "submit" class = "btn btn-primary">搜索</button>
             </form>
           </ul>
 
-            {%if  username  %}
+            {%if user.is_authenticated%}
                 <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown" >
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{username}}<span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.username}}<span class="caret"></span></a>
                 <ul class="dropdown-menu" style = "text-align:center">
                 <li><a href="#">个人空间</a></li>                                <!--用户个人空间入口-->
                 <li role="separator" class="divider"></li>
@@ -137,24 +128,11 @@
  <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-<<<<<<< HEAD
-    <!-- MODIFY we already has jquery in static file -->
-    <!-- <script src="https://cdn.bootcss.com/jquery/1.12.2/jquery.min.js"></script> -->
-    <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script>window.jQuery || document.write('<script src="{% static "js/jquery.min.js" %}"><\/script>')</script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/docs.min.js' %}"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
-    {% block extraFootJs %}{% endblock extraFootJs %}
-    {% block extraFootCss %}{% endblock extraFootCss %}
-=======
     <script src="https://cdn.bootcss.com/jquery/1.12.2/jquery.min.js"></script>
       <script>window.jQuery || document.write('<script src="{% static "js/jquery.min.js" %}"><\/script>')</script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/docs.min.js' %}"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
      <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
->>>>>>> 1f31bd05aa571117807c7a597b84f524adcd87cb
 </body>
 </html>
