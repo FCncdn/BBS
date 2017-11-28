@@ -72,13 +72,56 @@
         </div>
     </div>
 
+<<<<<<< HEAD
+<div class="container" style="background-color:#ffffff">
+    <hr>
+    <div>
+        <div class="border" style="width:20%; text-align:center; float:left; min-height:150px;">
+            <br>
+            <a href="#"><img src="../static/picture/zwei_art.jpg" alt="个人头像" class="img-rounded" style="height:80px; width:80px;"></a>
+            <br>
+            <a href="{{  }}"><h5>(用户名)</h5></a>
+        </div>
+        <div class="border" style="width:80%; float:left; min-height:150px;">
+            <p>
+说得对！！黄牛活该。
+            </p>                <!--注意！！！在获取评论时，表达式要紧贴左边线，不要在前面加任何缩进和空格，有的话就删掉-->
+        </div>
+    </div>
+    <br>
+    <br>
+=======
+>>>>>>> 1f31bd05aa571117807c7a597b84f524adcd87cb
     <div class="border" style=" width:100%; float:left">
         <h6 style="text-align:right">{{comment.submit_date}}</h6>
     </div>
 </div>
 
+<<<<<<< HEAD
+<div class="container" style="background-color:#ffffff">
+    <hr>
+    <div>
+        <div class="border" style="width:20%; text-align:center; float:left; min-height:150px;">
+            <br>
+            <a href="#"><img src="/static/picture/zwei_art.jpg" alt="个人头像" class="img-rounded" style="height:80px; width:80px;"></a>
+            <br>
+            <a href="#"><h5>(用户名)</h5></a>
+        </div>
+        <div class="border" style="width:80%; float:left; min-height:150px;">
+            <p>
+说得对！！黄牛活该。
+            </p>                <!--注意！！！在获取评论时，表达式要紧贴左边线，不要在前面加任何缩进和空格，有的话就删掉-->
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="border" style=" width:100%; float:left">
+        <h6 style="text-align:right">(评论时间)</h6>
+    </div>
+=======
 {%endfor%}
     </div><!--bs-example-->
+>>>>>>> 1f31bd05aa571117807c7a597b84f524adcd87cb
 </div><!--container-->
 
 
@@ -105,18 +148,12 @@
         </nav>
 
         <br>
-
-        {%if user.is_authenticated%}
-        <form action="/sub_comment/" method="POST">
-            <textarea class="form-control" rows="8" placeholder="发表你的高见" name="comment_content"></textarea>
-                 <input type="hidden" name="article_id" value="{{article_obj.id}}"/>
+        <div>
+            <textarea class="form-control" rows="8" placeholder="发表你的高见"></textarea>
             <br>
-            <button class="btn btn-info" type="submit" style="float:right" value="Add comment" id="id_submit">评论回复</button>
-        </form>
-        {%else%}
-			   <p>Please <a href='/login/'>Login</a> to sumbit a comment!</p>
-        {%endif%}
-    </div>
+            <button class="btn btn-info" type="submit" style="float:right">评论回复</button>
+        </div>
+    </div><!--container-->
 
 {% endblock %}
 

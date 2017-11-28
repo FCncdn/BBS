@@ -38,24 +38,27 @@
         <br>
 
         <div class="container">
-            <form method="post" action="/sub_article/">
+            <form>
                 <div class="form-group" style="width:30%">
                     <label for="partition">板块分区</label>
-                    <select class="form-control" id="partition" name="category">
-                        {% for category in bbs_category %}
-                             <option>{{ category.name}}</option>
-		               {%endfor%}
+                    <select class="form-control" id="partition">
+                        <option>分区1</option>
+                        <option>分区2</option>
+                        <option>分区3</option>
+                        <option>分区4</option>
+                        <option>分区5</option>
+                        <option>分区6</option>
                     </select>
                 </div>
                 <br>
                 <div class="form-group">
                     <label for="title">标题</label>
-                    <input type="text" class="form-control" id="title" placeholder="请输入标题" name="title">
+                    <input type="text" class="form-control" id="title" placeholder="请输入标题">
                 </div>
                 <br>
                 <div class="form-group">
                     <label for="post">文章</label>
-                    <textarea rows="10" class="form-control" id="post" placeholder="拿起键盘就是写！" name="content"></textarea>
+                    <textarea rows="10" class="form-control" id="post" placeholder="拿起键盘就是写！"></textarea>
                 </div>
                 <br>
 
