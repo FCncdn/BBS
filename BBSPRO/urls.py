@@ -13,8 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-
-from django.conf.urls import url,include
+from django.conf.urls import url
 from django.contrib import admin
 from bbs import views
 urlpatterns = [
@@ -22,16 +21,10 @@ urlpatterns = [
     url(r'^$', views.index),
     url(r'^article/(?P<article_id>[0-9]+)$', views.article),
     url(r'^partition/(?P<category_id>[0-9])$', views.partition),
-    url(r'^article_post/', views.article_post),
+    url(r'^sub_page/', views.sub_page),
     url(r'^login/$', views.login),
     url(r'^acc_login/$', views.acc_login),
     url(r'^logout/$', views.logout_view),
-
-]
-
-#custom app
-#personalProfile
-urlpatterns += [
-    url(r'^profile/(?P<pk>[0-9]+)/',
-        include('personalProfile.urls', namespace='personalProfile', app_name='personalProfile')),
+    url(r'^sub_comment/$', views.sub_comment),
+    url(r'^sub_article/$', views.sub_article),
 ]

@@ -5,6 +5,7 @@ from django.shortcuts import render_to_response
 from . import models
 from django.contrib import auth
 from django.http import HttpResponseRedirect
+from django_comments.models import Comment
 # Create your views here.
 
 
@@ -21,16 +22,33 @@ def index(request):
     bbs_category_four = models.Category.objects.get(id='4')
     bbs_category_five = models.Category.objects.get(id='5')
     bbs_category_six = models.Category.objects.get(id='6')
-    username = request.COOKIES.get('username', '')
+    user = request.user
     return render_to_response('index.html', locals())
 
-
 def article(request, article_id):
+    user = request.user
     article_obj = models.Article.objects.get(id=article_id)
+    count = article_obj.view_count
+    count = count+1
+    article_obj.view_count = count
+    article_obj.save()
     return render_to_response('article.html', locals())
 
 
+def sub_comment(request):
+    article_id = request.POST.get('article_id')
+    comment = request.POST.get('comment_content')
+    Comment.objects.create(
+        content_type_id=12,
+        object_pk=article_id,
+        site_id=1,
+        user=request.user,
+        comment=comment,
+    )
+    return HttpResponseRedirect('/article/%s' % article_id)
+
 def partition(request, category_id):
+    user = request.user
     partition_obj = models.Category.objects.get(id=category_id)
     bbs_list = models.Article.objects.filter(category_id=category_id)
     return render_to_response('partition.html', locals())
@@ -38,16 +56,31 @@ def partition(request, category_id):
 def login(request):
     return render_to_response('login.html')
 
-def article_post(request):
-    return render_to_response('articlepost.html')
+def sub_page(request):
+    bbs_category = models.Category.objects.all()
+    user = request.user
+    return render_to_response('articlepost.html', locals())
 
 def logout_view(request):
     user = request.user
     auth.logout(request)
     response = HttpResponse("<b>%s</b> Logged out! <br/><a href='/login/'>Re-Login</a>" % user)
-    response.delete_cookie('username')
     return response
 
+
+def sub_article(request):
+    content = request.POST.get('content')
+    title = request.POST.get('title')
+    author = models.UserProfile.objects.get(user__username=request.user)
+    category = models.Category.objects.get(name=request.POST.get('category'))
+    models.Article.objects.create(
+        title=title,
+        author=author,
+        content=content,
+        view_count=1,
+        category=category,
+    )
+    return   HttpResponseRedirect('/')
 
 def acc_login(request):
     username = request.POST.get('username')
@@ -56,7 +89,8 @@ def acc_login(request):
     if user is not None:
         auth.login(request, user)
         response = HttpResponseRedirect('/')
-        response.set_cookie('username', username, 3600)
         return response
     else:
         return render_to_response('login.html', {'login_err': 'Wrong username or password!'})
+
+
