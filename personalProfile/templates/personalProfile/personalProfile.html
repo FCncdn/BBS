@@ -227,6 +227,7 @@ Personal homepage
                     <!-- profile setting  -->
                     <div>
                         <a href="{% url 'personalProfile:personalProgileSetting' userObject.pk %}">edit</a>
+                        <p>{{ userObject.photo.url }}</p>
                     </div>
 
 

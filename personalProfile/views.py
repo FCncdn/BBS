@@ -37,16 +37,19 @@ def personalProfileSetting(request, pk):
 def personalProfileSettingMF(request, pk):
     userObject = get_object_or_404(UserProfile, pk = pk)
     baseUser = get_object_or_404(User,pk = userObject.user.pk)
+    template_name = 'personalProfile/personalProfileSetting.html'
     if request.method == 'POST':
         #band the form with post data
-        form = personalprofileSettingModelForm(request.POST)
+        form = personalprofileSettingModelForm(request.POST, request.FILES)
         if form.is_valid():
             userObject.name = form.cleaned_data['name']
             baseUser.username = form.cleaned_data['name']
             userObject.signature = form.cleaned_data['signature']
-            userObject.photo = form.cleaned_data['photo']
+            #userObject.photo = form.cleaned_data['photo']
+            userObject.photo = request.FILES['photo']
             userObject.save()
             baseUser.save()
+            #form.save()
             return HttpResponseRedirect(userObject.get_absolute_url())
     else:
         form = personalprofileSettingModelForm(initial={'name':userObject.name})
