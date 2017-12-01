@@ -7,17 +7,8 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-<<<<<<< HEAD
-
-    {% load static %}  
-
-    <link rel="icon" href="{% static 'icon/bbs1.png' %}">
-=======
       {% load static %}
     <link rel="icon" href="{% static 'icon/bbs1.png' %}">
-
-    <title>{% block title %}
->>>>>>> 1f31bd05aa571117807c7a597b84f524adcd87cb
 
     <title>{% block title %}{% endblock %}</title>
 
@@ -137,7 +128,6 @@
  <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-<<<<<<< HEAD
     <!-- MODIFY we already has jquery in static file -->
     <!-- <script src="https://cdn.bootcss.com/jquery/1.12.2/jquery.min.js"></script> -->
     <script src="{% static 'js/jquery.min.js' %}"></script>
@@ -148,13 +138,5 @@
     <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
     {% block extraFootJs %}{% endblock extraFootJs %}
     {% block extraFootCss %}{% endblock extraFootCss %}
-=======
-    <script src="https://cdn.bootcss.com/jquery/1.12.2/jquery.min.js"></script>
-      <script>window.jQuery || document.write('<script src="{% static "js/jquery.min.js" %}"><\/script>')</script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/docs.min.js' %}"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-     <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
->>>>>>> 1f31bd05aa571117807c7a597b84f524adcd87cb
 </body>
 </html>
