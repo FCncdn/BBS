@@ -69,7 +69,7 @@ class Category(models.Model):
 
 def user_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-    filename = "headImage"
+    filename = "headImage.jpg"
     return 'user_{0}/{1}'.format(instance.user.id, filename)
 
 
@@ -82,7 +82,7 @@ class UserProfile(models.Model):
     # 签名
     signature = models.CharField(max_length=128, default='This guy is too lazy to leave anything here.')
     # 头像
-    photo = models.ImageField(upload_to=user_directory_path, default='upload_imgs/user-1.jpg')
+    photo = models.ImageField(upload_to=user_directory_path ,default='upload_imgs/user-1.jpg')
 
     def __str__(self):      #__unicode__ in pyhton2
         return self.name

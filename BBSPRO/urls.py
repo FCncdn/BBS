@@ -17,6 +17,9 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from bbs import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index),
@@ -35,3 +38,7 @@ urlpatterns += [
     url(r'^profile/(?P<pk>[0-9]+)/',
         include('personalProfile.urls', namespace='personalProfile', app_name='personalProfile')),
 ]
+
+#for upload file
+#only work on development
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

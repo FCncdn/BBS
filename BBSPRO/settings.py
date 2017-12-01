@@ -69,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -130,4 +131,4 @@ STATICFILES_DIRS = (
     )
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'userUpload')
-MEDIA_URL = '/user_upload/' #随便设置
+MEDIA_URL = '/userUpload/' #随便设置
