@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.http import HttpResponse
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response,render,redirect
 from . import models
+from .forms import RegisterForm
 from django.contrib import auth
 from django.http import HttpResponseRedirect
 from django_comments.models import Comment
@@ -80,7 +81,7 @@ def sub_article(request):
         view_count=1,
         category=category,
     )
-    return   HttpResponseRedirect('/')
+    return  HttpResponseRedirect('/')
 
 def acc_login(request):
     username = request.POST.get('username')
@@ -93,4 +94,19 @@ def acc_login(request):
     else:
         return render_to_response('login.html', {'login_err': 'Wrong username or password!'})
 
+def register_handle(request):
 
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+
+        if form.is_valid():
+
+            form.save()
+
+            return redirect('/')
+    else:
+        form = RegisterForm()
+    return render(request, 'registration/register.html',context={'form': form})
+
+def register(request):
+    return render(request, 'registration/register.html')

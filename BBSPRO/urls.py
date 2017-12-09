@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^logout/$', views.logout_view),
     url(r'^sub_comment/$', views.sub_comment),
     url(r'^sub_article/$', views.sub_article),
+    url(r'^register/$', views.register_handle, name='register')
 ]

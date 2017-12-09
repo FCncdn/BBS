@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to register STU-BBS</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/holder.min.js"></script>
+    <script src="/static/js/jquery-1.12.4.min.js"></script>
+    <style>
+        body {
+            font-family: 'Microsoft Yahei';
+            font-size: 12px;
+            color: #666;
+        }
+        header.masthead {
+
+            text-align: left;
+
+            background-image: url(/static/picture/b1.jpg);
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            background-position: center center;
+            background-size: cover;
+        }
+        .login_top{
+            padding-top:60px;
+            padding-bottom:30px;
+        }
+        .slogan {
+            font-size: 30px;
+            line-height: 36px;
+            color:#ffffff
+        }
+        .r_con {
+            width: 400px;
+        }
+        .fr {
+            float: right;
+        }
+        .reg_title {
+            width: 360px;
+            height: 50px;
+            float: left;
+            margin-left: 30px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .clearfix {
+            zoom: 1;
+        }
+        .reg_title h1 {
+            height: 50px;
+            line-height: 50px;
+            float: left;
+            font-size: 24px;
+            color: #ffffff;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+        }
+        .reg_title a {
+            float: right;
+            height: 20px;
+            line-height: 20px;
+            font-size: 16px;
+            color: green;
+            padding-right: 20px;
+            margin-top: 15px;
+        }
+        .reg_form {
+            width: 360px;
+            margin: 30px 0 0 30px;
+            float: left;
+            position: relative;
+
+
+        }
+        .reg_form ul{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .reg_form li {
+            height: 70px;
+            display: list-item;
+            text-align: -webkit-match-parent;
+        }
+        .reg_form li label {
+            width: 70px;
+            height: 40px;
+            line-height: 40px;
+            float: left;
+            font-size: 14px;
+            color: #ffffff;
+            cursor: default;
+        }
+        .reg_form li input {
+            width: 288px;
+            height: 38px;
+            border: 1px solid #e0e0e0;
+            float: left;
+            outline: none;
+            text-indent: 10px;
+            background-color: #f8f8f8;
+        }
+        .reg_form li .error_tip {
+            float: left;
+            height: 30px;
+            line-height: 30px;
+            margin-left: 70px;
+            color: #e62e2e;
+            display: list-item;
+        }
+        .reg_form li.agreement input {
+            width: 15px;
+            height: 15px;
+            float: left;
+            margin-top: 13px;
+        }
+        .reg_form li.agreement label {
+            width: 300px;
+            float: left;
+            margin-left: 10px;
+        }
+        .reg_form li .error_tip2 {
+            float: left;
+            height: 20px;
+            line-height: 20px;
+            color: #e62e2e;
+            display: none;
+        }
+        .reg_form li.reg_sub input {
+            width: 360px;
+            height: 40px;
+            background-color: #47aa34;
+            font-size: 18px;
+            color: #fff;
+            font-family: 'Microsoft Yahei';
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<header class="masthead">
+    <div  class="container">
+        <div  class="login_top clearfix">
+            <a href="" class="login_logo"><img src="/static/picture/stu-logo-new.png"></a>
+        </div>
+        <div class="login-form-bg">
+            <div class="login-form-wrap clearfix">
+                <div class="slogan f1">欢迎使用汕大BBS</div>
+            </div>
+        </div>
+        <div class="r_con fr">
+            <div class="reg_title clearfix">
+                <h1>用户注册</h1>
+                <a href="/login/">登录</a>
+            </div>
+            <div class="reg_form clearfix">
+                <form class="form" action="/register/" method="post">
+                <div class="flex-center top-gap text-small">
+                    <a href="/login/">已有账号登录</a>
+                </div>
+                    <ul>
+                        <ul>
+                            {% csrf_token %}
+                            <li>
+                                <label>用户名:</label>
+                                <div>                  {{ form.username }}</div>
+                                <span class="error_tip"> {{ form.username.errors }}</span>
+                            </li>
+                            <li>
+                                <label>密码:</label>
+                                <div>                 {{ form.password1 }}</div>
+                                <span class="error_tip">{{ form.password1.errors }}</span>
+                            </li>
+                            <li>
+                                <label>确认密码:</label>
+                                <div>                {{ form.password2 }}</div>
+                                <span class="error_tip">{{ form.password2.errors }}</span>
+                            </li>
+                            <li>
+                                <label>邮箱:</label>
+                                <div>                 {{ form.email }}</div>
+                                <span class="error_tip">{{ form.email.errors }}</span>
+                            </li>
+                            <li class="reg_sub">
+                                <button type="submit" class="btn btn-primary btn-block">注册</button>
+                            </li>
+                        </ul>
+                    </ul>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</header>
+</body>
+</html>
