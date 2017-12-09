@@ -39,7 +39,9 @@
         </div>
         <div class="border" style="width:80%; float:left; min-height:150px;">
             <br>
-            <p>{{ article_obj.content }}</p>
+            {% autoescape off %}
+            {{ article_obj.content }}
+            {% endautoescape %}
         </div>
     </div>
 
@@ -105,7 +107,14 @@
         </nav>
 
         <br>
-
+<script type="text/javascript" src="/static/js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+tinymce.init({
+	mode : "textareas",
+     plugins: 'emoticons',
+  toolbar1: 'bold italic strikethrough forecolor |removeformat | emoticons',
+});
+</script>
         {%if user.is_authenticated%}
         <form action="/sub_comment/" method="POST">
             <textarea class="form-control" rows="8" placeholder="发表你的高见" name="comment_content"></textarea>

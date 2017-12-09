@@ -31,7 +31,7 @@ def article(request, article_id):
     count = article_obj.view_count
     count = count+1
     article_obj.view_count = count
-    article_obj.save()
+    article_obj.save(update_fields=["view_count"])
     return render_to_response('article.html', locals())
 
 

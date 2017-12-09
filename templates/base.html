@@ -13,10 +13,7 @@
     <title>{% block title %}
 
     {% endblock %}</title>
-    <style>
-        {% block style %}
-        {% endblock %}
-    </style>
+
 
     {% block extraHeadJs %}{% endblock extraHeadJs %}
     {% block extraHeadCss %}{% endblock extraHeadCss %}
@@ -33,7 +30,10 @@
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
        <script src="{% static 'js/ie-emulation-modes-warning.js' %}"></script>
-
+    <style>
+        {% block style %}
+        {% endblock %}
+    </style>
   </head>
 <body>
 <!-- Fixed navbar -->
