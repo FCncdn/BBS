@@ -22,7 +22,7 @@ class Article(models.Model):
     # 帖子的浏览数
     view_count = models.IntegerField(default=0, verbose_name="浏览数")
     # 帖子隐藏
-    def __unicode__(self):
+    def __str__(self):
         return "<%s,author:%s>" % (self.title, self.author)
 
 
@@ -42,7 +42,7 @@ class Comment(models.Model):
     # 这里parent_comment,必须设置为可以为空,因为如果他是第一评论他是没有父ID的
     parent_comment = models.ForeignKey("self", related_name='p_comment', blank=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return "<user:%s>" % (self.user)
 
 
@@ -61,7 +61,7 @@ class Category(models.Model):
     # 板块管理员
     admin = models.ManyToManyField("UserProfile", verbose_name="模块管理员")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -76,12 +76,12 @@ class UserProfile(models.Model):
     # 头像
     photo = models.ImageField(upload_to="upload_imgs/", default='upload_imgs/user-1.jpg')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
 class UserGroup(models.Model):
     name = models.CharField(max_length=64, unique=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
