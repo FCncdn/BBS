@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index),
     url(r'^article/(?P<article_id>[0-9]+)$', views.article),
-    url(r'^partition/(?P<category_id>[0-9])$', views.partition),
+    url(r'^partition/(?P<category_id>[0-9]+)/(?P<page>[0-9]+)/$', views.partition, name='partition'),
     url(r'^article_post/', views.article_post),
     url(r'^login/$', views.login),
     url(r'^acc_login/$', views.acc_login),
@@ -41,4 +41,9 @@ urlpatterns += [
 
 #for upload file
 #only work on development
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

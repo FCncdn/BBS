@@ -82,7 +82,7 @@ class UserProfile(models.Model):
     # 签名
     signature = models.CharField(max_length=128, default='This guy is too lazy to leave anything here.')
     # 头像
-    photo = models.ImageField(upload_to=user_directory_path ,default='upload_imgs/user-1.jpg')
+    headImage = models.ImageField(upload_to=user_directory_path ,default='upload_imgs/user-1.jpg')
 
     def __str__(self):      #__unicode__ in pyhton2
         return self.name

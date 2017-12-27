@@ -30,9 +30,32 @@ def article(request, article_id):
     return render_to_response('article.html', locals())
 
 
-def partition(request, category_id):
+def partition(request, category_id, page=1):
     partition_obj = models.Category.objects.get(id=category_id)
-    bbs_list = models.Article.objects.filter(category_id=category_id)
+    bbs_list = models.Article.objects.filter(category_id=category_id)[(int(page)-1)*10:10]
+    numPost = models.Article.objects.filter(category_id=category_id).count()
+    #numPost = 200
+    numModular = numPost%10
+    page = int(page)
+
+    if  numModular != 0:
+        if int(page) > 5:
+            numIndex = range(1,int(numPost/10)+2)[int(page)-5:int(page)+5]
+        else:
+            numIndex = range(1,int(numPost/10)+2)[0:10]
+    else:
+        if int(page) > 5:
+            numIndex = range(1,int(numPost/10)+1)[int(page)-5:int(page)+5]
+        else:
+            numIndex = range(1,int(numPost/10)+1)[0:10]
+    if int(page) == numIndex[-1]:
+        nextPage = numIndex[-1]
+    else:
+        nextPage = int(page)+1
+    if int(page)  == 1:
+        previousPage = 1
+    else:
+        previousPage = int(page)-1
     return render_to_response('partition.html', locals())
 
 def login(request):

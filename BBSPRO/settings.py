@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bbs',
     'django.contrib.sites',
-    'django_comments'
+    'django_comments',
+    'debug_toolbar'
 ]
 #custom app
 INSTALLED_APPS += [
@@ -54,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware'
 ]
 
 ROOT_URLCONF = 'BBSPRO.urls'
@@ -132,3 +134,5 @@ STATICFILES_DIRS = (
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'userUpload')
 MEDIA_URL = '/userUpload/' #随便设置
+
+INTERNAL_IPS = {'127.0.0.1'}
