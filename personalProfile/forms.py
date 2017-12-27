@@ -16,4 +16,4 @@ class personalProfileSettingForm(forms.Form):
 class personalprofileSettingModelForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['name', 'signature', 'photo']
+        fields = ['name', 'signature', 'headImage']

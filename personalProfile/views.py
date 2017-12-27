@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from bbs.models import UserProfile
 from .forms import personalProfileSettingForm
 from .forms import personalprofileSettingModelForm
+from .models import FollowShip
+from bbs.models import Article
 
 class personalProfileDetail(DetailView):
     #model = get_object_or_404(UserProfile, pk = )
@@ -17,7 +19,10 @@ class personalProfileDetail(DetailView):
     
     def get_context_data(self, **kwargs):
         context = super(personalProfileDetail, self).get_context_data(**kwargs)
-        context['user'] = UserProfile
+        #context['user'] = UserProfile
+        context['numFollower'] = FollowShip.objects.filter(follower__pk=self.kwargs['pk']).count()
+        context['numFollowed'] = FollowShip.objects.filter(followed__pk=self.kwargs['pk']).count()
+        context['numPost'] = Article.objects.filter(author__pk=self.kwargs['pk']).count()
         return context
 
 
