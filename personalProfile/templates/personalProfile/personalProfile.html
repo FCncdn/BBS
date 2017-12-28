@@ -146,6 +146,8 @@ Personal homepage
 {% endblock style %}
 
 {% block body %}
+{% load guardian_tags %}
+{% get_obj_perms user for userFront.profile as "profile_perms" %}
 
 <div class="container">
 
@@ -154,10 +156,9 @@ Personal homepage
 
             <div class="col-md-8 main">
                 <div class="main-top">
-                    <a class="avatar" href=""><img src="{{ userObject.headImage.url }}" alt="headImage-80" width="80" height="80"></a>
+                    <a class="avatar" href=""><img src="{{ userFront.profile.headImage.url }}" alt="headImage-80" width="80" height="80"></a>
                     <div class="title">
-                        <p class="name">{{ userObject.name }}</p>
-                        <a href="{% url 'personalProfile:personalProfileSetting' userObject.pk %}">编辑</a>
+                        <p class="name">{{ userFront.profile.name }}</p>
                     </div>
 
                     <div class="infor">
@@ -258,7 +259,9 @@ Personal homepage
             <div class="col-md-4 aside">
                 <div class="title">
                     个人介绍
-                    <a class="function-btn" href=""><span class="glyphicon glyphicon-edit"></span>编辑</a>
+                    {% if 'edit_profile' in profile_perms %}
+                    <a class="function-btn" href="{% url 'personalProfile:personalProfileSetting' userFront.profile.pk %}"><span class="glyphicon glyphicon-edit"></span>编辑</a>
+                    {% endif %}
                 </div>
                 <div class="description">
                     <div class="js-intro" style="display: block;">model.个人介绍</div>

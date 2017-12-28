@@ -74,7 +74,10 @@ def user_directory_path(instance, filename):
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name='profile')
     # 名字
     name = models.CharField(max_length=32)
     # 属组
@@ -86,9 +89,13 @@ class UserProfile(models.Model):
 
     def __str__(self):      #__unicode__ in pyhton2
         return self.name
-    
     def get_absolute_url(self):
         return reverse("personalProfile:personalProfileMain", args=[str(self.pk)])
+    class Meta:
+        permissions = (
+            ('edit_profile','Edit profile'),
+        )
+
 
 
 
