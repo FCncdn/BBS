@@ -54,6 +54,7 @@ def personalProfileSettingMF(request, pk):
             userObject.signature = form.cleaned_data['signature']
             #userObject.photo = form.cleaned_data['photo']
             userObject.photo = request.FILES['headImage']
+            #userObject.photo = request.FILES['photo']
             userObject.save()
             baseUser.save()
             #form.save()
