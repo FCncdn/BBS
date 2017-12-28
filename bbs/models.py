@@ -90,7 +90,7 @@ class UserProfile(models.Model):
     def __str__(self):      #__unicode__ in pyhton2
         return self.name
     def get_absolute_url(self):
-        return reverse("personalProfile:personalProfileMain", args=[str(self.pk)])
+        return reverse("personalProfile:personalProfileMain", args=[str(self.user.pk)])
     class Meta:
         permissions = (
             ('edit_profile','Edit profile'),

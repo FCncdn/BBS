@@ -53,10 +53,11 @@ def personalProfileSettingMF(request, pk):
             baseUser.username = form.cleaned_data['name']
             userObject.signature = form.cleaned_data['signature']
             #userObject.photo = form.cleaned_data['photo']
-            userObject.photo = request.FILES['photo']
+            userObject.photo = request.FILES['headImage']
             userObject.save()
             baseUser.save()
             #form.save()
+            print("***personalProfileSettingMF::form valid done")
             return HttpResponseRedirect(userObject.get_absolute_url())
     else:
         form = personalprofileSettingModelForm(initial={'name':userObject.name})
