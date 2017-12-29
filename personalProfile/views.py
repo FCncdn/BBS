@@ -12,10 +12,11 @@ class personalProfileDetail(DetailView):
     #model = get_object_or_404(UserProfile, pk = )
     #model = UserProfile
     template_name = 'personalProfile/personalProfile.html'
-    context_object_name = 'userObject'
+    context_object_name = 'userFront'
 
     def get_queryset(self):
-        return UserProfile.objects.filter(pk=self.kwargs['pk'])
+        #return UserProfile.objects.filter(pk=self.kwargs['pk'])
+        return User.objects.filter(pk=self.kwargs['pk'])
     
     def get_context_data(self, **kwargs):
         context = super(personalProfileDetail, self).get_context_data(**kwargs)
@@ -23,6 +24,8 @@ class personalProfileDetail(DetailView):
         context['numFollower'] = FollowShip.objects.filter(follower__pk=self.kwargs['pk']).count()
         context['numFollowed'] = FollowShip.objects.filter(followed__pk=self.kwargs['pk']).count()
         context['numPost'] = Article.objects.filter(author__pk=self.kwargs['pk']).count()
+        context['articles'] = Article.objects.filter(author__pk=self.kwargs['pk'])
+        
         return context
 
 
@@ -51,12 +54,20 @@ def personalProfileSettingMF(request, pk):
             baseUser.username = form.cleaned_data['name']
             userObject.signature = form.cleaned_data['signature']
             #userObject.photo = form.cleaned_data['photo']
-            userObject.photo = request.FILES['photo']
+            userObject.headImage = request.FILES['headImage']
+            #userObject.photo = request.FILES['photo']
             userObject.save()
             baseUser.save()
             #form.save()
+            print("***personalProfileSettingMF::form valid done")
             return HttpResponseRedirect(userObject.get_absolute_url())
     else:
         form = personalprofileSettingModelForm(initial={'name':userObject.name})
     return render(request, 'personalProfile/personalProfileSetting.html',
                   {'form':form, 'userObejct':userObject})
+
+def personalProfileDynamic(request, pk):
+    return render(request, 'personalProfile/personalProfileDynamic.html',{})
+
+def personalProfileFavourite(request, pk):
+    return render(request, 'personalProfile/personalProfileFavourite.html',{})

@@ -1,0 +1,592 @@
+{% extends "base.html" %}
+{% block title %}
+Dynamic homepage
+{% endblock title %}
+
+
+{% block style %}
+    .trigger-menu {
+        margin-bottom: 20px;
+        border-bottom: 1px solid #f0f0f0;
+
+    }
+    .trigger-menu li {
+        position: relative;
+        display: inline-block;
+        padding: 8px 0;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    .avatar img {
+        width: 100%;
+        height: 100%;
+        border: 1px solid #ddd;
+        border-radius: 50%;
+    }
+
+    .person .main-top .avatar {
+        float: left;
+        width: 80px;
+        height: 80px;
+        margin-left: -2px;
+    }/*图像大小*/
+
+    .person .row {
+        padding-top:80px;
+        margin-left: 20px;
+    }
+    .person .main .main-top {
+        margin-bottom: 20px;
+    }
+    .name {
+        display: inline;
+        font-size: 21px;
+        font-weight: 700;
+        vertical-align: middle;
+
+    }
+    .person .main .main-top .name {
+
+        padding-left:20px;
+        color:#222;
+    }
+
+    .function-btn {
+        color: #2f2f2f;
+        float:right;
+    }
+    .person .aside .title{
+        padding-bottom:10px;
+    }
+    .person .aside .description{
+        position: relative;
+        margin-bottom: 16px;
+        padding: 0 0 16px;
+        text-align: left;
+        font-size: 0;
+        border-bottom: 1px solid #f0f0f0;
+        clear: both;
+        word-break: break-word!important;
+        word-break: break-all;
+    }
+    .person .aside .description .js-intro{
+        margin-bottom: 10px;
+        line-height: 20px;
+        font-size: 14px;
+    }
+    .person .aside .user-dynamic{
+        padding-bottom: 6px;
+
+    }
+    .person .aside .list {
+        margin-bottom: 16px;
+        padding-bottom: 16px;
+        list-style: none;
+        border-bottom: 1px solid #f0f0f0;
+        clear: both;
+    }
+    .person .aside .user-dynamic a {
+        font-size: 14px;
+        color: #333;
+        line-height: 30px;
+    }
+    .person .aside .new-collection-btn {
+        font-size: 13px;
+        color: #42c02e;
+    }
+    .person .aside .list li {
+        margin-bottom: 10px;
+    }
+    .person .aside .list li a {
+        display: inline-block;
+    }
+    .person .aside .avatar-collection {
+        margin-right: 5px;
+        width: 32px;
+        height: 32px;
+    }
+    .avatar-collection img {
+        width: 100%;
+        height: 100%;
+        border: 1px solid #ddd;
+        border-radius:10%;
+    }
+    .person .aside .name {
+        position: relative;
+        max-width: 176px;
+        vertical-align: middle;
+        top: 1px;
+        font-size: 14px;
+        color: #333;
+    }
+    .media-b .m-auto-list {
+        max-width: 400px;
+
+        margin-left: -.125rem;
+        margin-right: -.125rem;
+        margin-bottom: -.25rem;
+        padding: 0 0;
+
+    }
+    .media-b .m-auto-list ul {
+        list-style: none;
+    }
+    .media-b .m-auto-list .m-auto-box {
+        width: 30%;
+    }
+    .m-auto-list li {
+        display: inline-block;
+        vertical-align: top;
+    }
+    .media-b .m-auto-box {
+        padding-left: .125rem;
+        padding-right: .125rem;
+        margin-bottom: .25rem;
+    }
+    .m-auto-box {
+
+        box-sizing: border-box;
+    }
+    .media-b .m-auto-list {
+        max-width: 400px;
+    }
+    .m-imghold-square {
+        padding-bottom: 100%;
+    }
+    [class*=m-imghold] {
+        height: 0;
+        position: relative;
+    }
+    .m-img-box {
+        display: inline-block;
+        width: 100%;
+    }
+    [class*=m-imghold]>img {
+        z-index: 0;
+        height: 100%;
+        position: absolute;
+    }
+    .m-img-box img {
+        width: 100%;
+        vertical-align: top;
+        object-fit: cover;
+    }
+    .note-list li{
+        display:inline-block;
+    }
+{% endblock style %}
+
+{% block body %}
+<div class="container">
+    <div class="person container">
+        <div class="row">
+            <div class="col-md-6 main">
+                <div class="main-top">
+                    <a class="avatar" href=""><img src="b1.jpg" alt="240"></a><!--用户头像-->
+                    <div class="title">
+                        <a class="name" href="">#user name#</a>
+                    </div>
+                    <div class="infor">
+                        <ul class="nav navbar-nav">
+                            <li >
+
+                                <a class="n-data-a" href="" >关注<p class="n-data-b">#关注数#</p></a>
+                            </li>
+                            <li>
+                                <a class="n-data-a" href="">粉丝<p class="n-data-b">#粉丝数#</p></a>
+                            </li>
+                            <li>
+                                <a class="n-data-a" href="">文章<p class="n-data-b">文章数目</p></a>
+                            </li>
+                            <li>
+                                <a class="n-data-a" >收获喜欢<p class="n-data-b">#收获喜欢数#</p></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-16 main2">
+                            <div class="trigger-menu">
+                                <ul class="nav navbar-nav" data-pjax-container="#list-container">
+                                    <li class="active">
+                                        <a href=""><span class="glyphicon glyphicon-list-alt"></span> 文章</a>
+                                    </li>
+                                    <li class>
+                                        <a href=""><span class="glyphicon glyphicon-bell"></span>动态</a>
+                                    </li>
+
+                                    <li>
+                                        <a href=""><span class="glyphicon glyphicon-bookmark"></span>收藏夹</a>
+                                    </li>
+                                    <!--<li>
+                                        <a href=""><span class="glyphicon glyphicon-fire"></span>热门</a>
+                                    </li>-->
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="list-container">
+                        <ul class="note-list">
+                            <li class="note-list-a">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <div class="media-object">
+                                            <a href=""><img src="holder.js/60x60" alt=""></a><!--用户头像-->
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="media-heading">
+                                            <div class="name2">
+                                                <a href="">#用户名#</a>
+                                                <span class="times">#发布时间#</span>
+                                            </div>
+                                            <a href="">#文章标题#</a>
+                                            <div class="post content">
+                                                <p class="abstract">#发布内容#</p>
+                                                <a href="">...全文</a>
+                                            </div>
+                                            <div>
+                                                <div class="media-b">
+                                                    <ul class="m-auto-list">
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#">
+                                                                <!---->
+                                                            </div>
+                                                        </li>
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#">
+                                                                <!---->
+                                                            </div>
+                                                        </li>
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#">
+                                                                <!---->
+                                                            </div>
+                                                        </li>
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#">
+                                                                <!---->
+                                                            </div>
+                                                        </li>
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#">
+                                                                <!---->
+                                                            </div>
+                                                        </li>
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                            <img src="#图片#">
+                                                                <!---->
+                                                            </div>
+                                                        </li>
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#">
+                                                                <!---->
+                                                            </div>
+                                                        </li>
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#"> <!---->
+                                                            </div>
+                                                        </li>
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#">
+                                                                <!---->
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <!---->
+                                                </div>
+                                            </div>
+                                        <div class="footer">
+                                            <div class="trigger-menu22">
+                                                <ul class="nav navbar-nav" data-pjax-container="#list-container">
+
+
+                                                    <li class="active">
+                                                        <a href=""><span class="glyphicon glyphicon-eye-open"></span><b>#浏览数#</b></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href=""><span class="glyphicon glyphicon-comment"></span><b>#评论数#</b></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href=""><span class="glyphicon glyphicon-thumbs-up"></span><b>#点赞#</b></a>
+
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li class="note-list-a">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <div class="media-object">
+                                            <a href=""><img src="holder.js/60x60" alt=""></a><!--用户头像-->
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="media-heading">
+                                            <div class="name2">
+                                                <a href="">#用户名#</a>
+                                                <span class="times">#发布时间#</span>
+                                            </div>
+                                            <a href="">#文章标题#</a>
+                                            <div class="post content">
+                                                <p class="abstract">#发布内容#</p>
+                                                <a href="">...全文</a>
+                                            </div>
+                                            <div>
+                                                <div class="media-b">
+                                                    <ul class="m-auto-list">
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#">
+                                                                <!---->
+                                                            </div>
+                                                        </li>
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#">
+                                                                <!---->
+                                                            </div>
+                                                        </li>
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#">
+                                                                <!---->
+                                                            </div>
+                                                        </li>
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#">
+                                                                <!---->
+                                                            </div>
+                                                        </li>
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#">
+                                                                <!---->
+                                                            </div>
+                                                        </li>
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#">
+                                                                <!---->
+                                                            </div>
+                                                        </li>
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#">
+                                                                <!---->
+                                                            </div>
+                                                        </li>
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#"> <!---->
+                                                            </div>
+                                                        </li>
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#">
+                                                                <!---->
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <!---->
+                                                </div>
+                                            </div>
+                                            <div class="footer">
+                                                <div class="trigger-menu22">
+                                                    <ul class="nav navbar-nav" data-pjax-container="#list-container">
+
+
+                                                        <li class="active">
+                                                            <a href=""><span class="glyphicon glyphicon-eye-open"></span><b>#浏览数#</b></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href=""><span class="glyphicon glyphicon-comment"></span><b>#评论数#</b></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href=""><span class="glyphicon glyphicon-thumbs-up"></span><b>#点赞#</b></a>
+
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                            </li>
+                            <li class="note-list-a">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <div class="media-object">
+                                            <a href=""><img src="holder.js/60x60" alt=""></a><!--用户头像-->
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="media-heading">
+                                            <div class="name2">
+                                                <a href="">#用户名#</a>
+                                                <span class="times">#发布时间#</span>
+                                            </div>
+                                            <a href="">#文章标题#</a>
+                                            <div class="post content">
+                                                <p class="abstract">#发布内容#</p>
+                                                <a href="">...全文</a>
+                                            </div>
+                                            <div>
+                                                <div class="media-b">
+                                                    <ul class="m-auto-list">
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#">
+                                                                <!---->
+                                                            </div>
+                                                        </li>
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#">
+                                                                <!---->
+                                                            </div>
+                                                        </li>
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#">
+                                                                <!---->
+                                                            </div>
+                                                        </li>
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#">
+                                                                <!---->
+                                                            </div>
+                                                        </li>
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#">
+                                                                <!---->
+                                                            </div>
+                                                        </li>
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#">
+                                                                <!---->
+                                                            </div>
+                                                        </li>
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#">
+                                                                <!---->
+                                                            </div>
+                                                        </li>
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#"> <!---->
+                                                            </div>
+                                                        </li>
+                                                        <li class="m-auto-box">
+                                                            <div class="m-img-box m-imghold-square">
+                                                                <img src="#图片#">
+                                                                <!---->
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <!---->
+                                                </div>
+                                            </div>
+                                            <div class="footer">
+                                                <div class="trigger-menu22">
+                                                    <ul class="nav navbar-nav" data-pjax-container="#list-container">
+
+
+                                                        <li class="active">
+                                                            <a href=""><span class="glyphicon glyphicon-eye-open"></span><b>#浏览数#</b></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href=""><span class="glyphicon glyphicon-comment"></span><b>#评论数#</b></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href=""><span class="glyphicon glyphicon-thumbs-up"></span><b>#点赞#</b></a>
+
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-3 col-md-offset-2 aside">
+                <div class="title">
+                    个人介绍
+                    <a class="function-btn" href=""><span class="glyphicon glyphicon-edit"></span>编辑</a>
+                </div>
+                <div class="description">
+                    <div class="js-intro" style="display: block;">#个人介绍#</div>
+                </div>
+                <ul class="list user-dynamic">
+                    <li>
+                        <a href=""><span class="glyphicon glyphicon-th-large"></span>  我关注的专题</a>
+                    </li>
+                    <li>
+                        <a href=""><span class="glyphicon glyphicon-heart-empty"></span> 我喜欢的内容</a>
+                    </li>
+                </ul>
+                <!--专题-->
+                <div>
+                    <div>
+                        <div class="title">
+                            我创建的专题
+                            <a href="" class="function-btn new-collection-btn" ><span class="glyphicon glyphicon-plus"></span>新建专题</a>
+                        </div>
+                        <ul class="list">
+                            <li>
+                                <a href="" target="_blank" class="avatar-collection"><img src="#用户头像#" ></a>
+                                <a href="" target="_blank" class="name">#创建的专题#</a>
+                            </li>
+                            <li>
+                                <!---->
+                                <!---->
+                            </li>
+                        </ul>
+
+                    </div>
+                    <!--<div class="title">
+                        我的日记
+                    </div>
+                    <ul class="list">
+                        <li>
+                            <a href="" target="_blank" ></a>
+                            <a hreff="" target="_blank" class="name"><span class="glyphicon glyphicon-book"></span> 日记本</a>
+                        </li>
+                    </ul>-->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

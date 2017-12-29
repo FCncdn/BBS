@@ -39,11 +39,15 @@ INSTALLED_APPS = [
     'bbs',
     'django.contrib.sites',
     'django_comments',
-    'debug_toolbar'
+    'debug_toolbar',
 ]
 #custom app
 INSTALLED_APPS += [
     'personalProfile',
+]
+#third-party app
+INSTALLED_APPS += [
+    'guardian',
 ]
 
 SITE_ID = 1
@@ -135,4 +139,11 @@ STATICFILES_DIRS = (
 MEDIA_ROOT = os.path.join(BASE_DIR, 'userUpload')
 MEDIA_URL = '/userUpload/' #随便设置
 
+#for django_debug_toolbar
 INTERNAL_IPS = {'127.0.0.1'}
+
+#for guardian
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend', # this is default
+    'guardian.backends.ObjectPermissionBackend',
+)

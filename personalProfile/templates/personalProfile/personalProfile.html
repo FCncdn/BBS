@@ -6,7 +6,6 @@ Personal homepage
 {% block extraHeadJs %}
 {% load static %}
 <!-- <script src="{% static 'js/holder.min.js' %}"></script> -->
-
 {% endblock extraHeadJs %}
 
 {% block style %}
@@ -146,6 +145,8 @@ Personal homepage
 {% endblock style %}
 
 {% block body %}
+{% load guardian_tags %}
+{% get_obj_perms user for userFront.profile as "profile_perms" %}
 
 <div class="container">
 
@@ -154,19 +155,10 @@ Personal homepage
 
             <div class="col-md-8 main">
                 <div class="main-top">
-                    <a class="avatar" href=""><img src="{{ userObject.headImage.url }}" alt="headImage-80" width="80" height="80"></a>
+                    <a class="avatar" href=""><img src="{{ userFront.profile.headImage.url }}" alt="headImage-80" width="80" height="80"></a>
                     <div class="title">
-                        <p class="name">{{ userObject.name }}</p>
-                        <a href="{% url 'personalProfile:personalProfileSetting' userObject.pk %}">编辑</a>
+                        <p class="name">{{ userFront.profile.name }}</p>
                     </div>
-                    
-                    <!-- profile setting  -->
-                   <div>
-                       
-                        <!-- <p>{{ userObject.headImage.url }}</p> -->
-
-                    </div> 
-
 
                     <div class="infor">
                         <ul class="nav navbar-nav">
@@ -210,24 +202,27 @@ Personal homepage
 
                         <!--文章列表模块-->
                         <ul class="note-list" infinite-scroll-url="">
+
+
+
+                            {% for article in articles %}
                             <li class="note-list-a">
                                 <div class="media">
                                     <div class="media-left">
                                         <div class="media-object">
-                                            <a href=""><img src="holder.js/60x60" alt=""></a>
-                                            
+                                            <a href=""><img src="{{ userFront.profile.headImage.url }}" width="60" height="60" alt=""></a>
                                         </div>
                                     </div>
                                     <div class="media-body">
                                         <div class="media-heading">
                                             <div class="name2">
-                                                <a href="">name</a>
-                                                <span class="times">publish-date</span>
+                                                <a href="">{{ userFront.username }}</a>
+                                                <span class="times">{{ article.publish_date }}</span>
                                             </div>
-                                            <a href="">???</a>
+                                            <a href="">{{ article.title }}</a>
 
                                             <p class="abstract">
-                                                publish-content
+                                                {{ article.content }}
                                             </p>
                                         </div>
                                         <div class="footer">
@@ -236,10 +231,10 @@ Personal homepage
 
 
                                                     <li class="active">
-                                                        <a href=""><span class="glyphicon glyphicon-eye-open"></span><b>watch-num</b></a>
+                                                        <a href=""><span class="glyphicon glyphicon-eye-open"></span><b>{{ article.view_count }}</b></a>
                                                     </li>
                                                     <li>
-                                                        <a href=""><span class="glyphicon glyphicon-comment"></span><b>comment-num</b></a>
+                                                        <a href=""><span class="glyphicon glyphicon-comment"></span><b>{{ article.comment.count }}</b></a>
                                                     </li>
                                                     <li>
                                                         <a href=""><span class="glyphicon glyphicon-thumbs-up"></span><b>like-num</b></a>
@@ -253,90 +248,10 @@ Personal homepage
                                     </div>
                                 </div>
                             </li>
-                            <li class="note-list-a">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <div class="media-object">
-                                            <a href=""><img src="holder.js/60x60" alt=""></a>
-                                        </div>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="media-heading">
-                                            <div class="name2">
-                                                <a href="">二哈</a>
-                                                <span class="times">5天前</span>
-                                            </div>
-                                            <a href="">6666666</a>
-
-                                            <p class="abstract">I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;</p>
-                                        </div>
-                                        <div class="footer">
-                                            <div class="trigger-menu22">
+                            {% endfor %}
 
 
-                                                <ul class="nav navbar-nav" data-pjax-container="#list-container">
 
-
-                                                    <li class="active">
-                                                        <a href=""><span class="glyphicon glyphicon-eye-open"></span><b>11000</b></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href=""><span class="glyphicon glyphicon-comment"></span><b>52</b></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href=""><span class="glyphicon glyphicon-thumbs-up"></span><b>11</b></a>
-
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="note-list-a">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <div class="media-object">
-                                            <a href=""><img src="holder.js/60x60" alt=""></a>
-                                        </div>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="media-heading">
-                                            <div class="name2">
-                                                <a href="">二哈</a>
-                                                <span class="times">5天前</span>
-                                            </div>
-                                            <a href="">6666666</a>
-
-                                            <p class="abstract">I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;I have a pen,I have an apple;</p>
-                                        </div>
-                                        <div class="footer">
-                                            <div class="trigger-menu22">
-
-
-                                                <ul class="nav navbar-nav" data-pjax-container="#list-container">
-
-
-                                                    <li class="active">
-                                                        <a href=""><span class="glyphicon glyphicon-eye-open"></span><b>11000</b></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href=""><span class="glyphicon glyphicon-comment"></span><b>52</b></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href=""><span class="glyphicon glyphicon-thumbs-up"></span><b>11</b></a>
-
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -346,10 +261,12 @@ Personal homepage
             <div class="col-md-4 aside">
                 <div class="title">
                     个人介绍
-                    <a class="function-btn" href=""><span class="glyphicon glyphicon-edit"></span>编辑</a>
+                    {% if 'edit_profile' in profile_perms %}
+                    <a class="function-btn" href="{% url 'personalProfile:personalProfileSetting' userFront.profile.pk %}"><span class="glyphicon glyphicon-edit"></span>编辑</a>
+                    {% endif %}
                 </div>
                 <div class="description">
-                    <div class="js-intro" style="display: block;">model.个人介绍</div>
+                    <div class="js-intro" style="display: block;">{{ userFront.profile.signature }}</div>
                 </div>
                 <ul class="list user-dynamic">
                     <li>
@@ -380,12 +297,8 @@ Personal homepage
                                 <!---->
                             </li>
                         </ul>
+                        
 
-
-
-                    </div>
-                    <div class="title">
-                        我的日记
                     </div>
                     <ul class="list">
                         <li>

@@ -32,7 +32,9 @@ class Comment(models.Model):
     # 评论是基于文章的,并且一条评论只属于一个文章
     # 一个文章可以有多个评论,一个评论只属于一个文章
     # 评论文章
-    article = models.ForeignKey("Article")
+    article = models.ForeignKey(
+        "Article",
+        related_name='comment')
     # 评论用户
     user = models.ForeignKey("UserProfile")
     # 评论内容
@@ -74,7 +76,10 @@ def user_directory_path(instance, filename):
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name='profile')
     # 名字
     name = models.CharField(max_length=32)
     # 属组
@@ -86,9 +91,13 @@ class UserProfile(models.Model):
 
     def __str__(self):      #__unicode__ in pyhton2
         return self.name
-    
     def get_absolute_url(self):
-        return reverse("personalProfile:personalProfileMain", args=[str(self.pk)])
+        return reverse("personalProfile:personalProfileMain", args=[str(self.user.pk)])
+    class Meta:
+        permissions = (
+            ('edit_profile','Edit profile'),
+        )
+
 
 
 
