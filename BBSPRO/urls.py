@@ -40,10 +40,17 @@ urlpatterns += [
 ]
 
 #for upload file
-#only work on development
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+#third-party app
+#debug_tool_bar - only work on development
 if settings.DEBUG:
     import debug_toolbar
-    urlpatterns = [
+    urlpatterns += [
         url(r'^__debug__/', include(debug_toolbar.urls)),
-    ] + urlpatterns
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    ]
+
+#serch 
+urlpatterns += [
+    url(r'^search/', include('haystack.urls')),
+]
