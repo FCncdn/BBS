@@ -32,7 +32,9 @@ class Comment(models.Model):
     # 评论是基于文章的,并且一条评论只属于一个文章
     # 一个文章可以有多个评论,一个评论只属于一个文章
     # 评论文章
-    article = models.ForeignKey("Article")
+    article = models.ForeignKey(
+        "Article",
+        related_name='comment')
     # 评论用户
     user = models.ForeignKey("UserProfile")
     # 评论内容

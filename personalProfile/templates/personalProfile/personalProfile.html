@@ -6,7 +6,6 @@ Personal homepage
 {% block extraHeadJs %}
 {% load static %}
 <!-- <script src="{% static 'js/holder.min.js' %}"></script> -->
-
 {% endblock extraHeadJs %}
 
 {% block style %}
@@ -206,25 +205,24 @@ Personal homepage
 
 
 
-
+                            {% for article in articles %}
                             <li class="note-list-a">
                                 <div class="media">
                                     <div class="media-left">
                                         <div class="media-object">
-                                            <a href=""><img src="holder.js/60x60" alt=""></a>
-                                            
+                                            <a href=""><img src="{{ userFront.profile.headImage.url }}" width="60" height="60" alt=""></a>
                                         </div>
                                     </div>
                                     <div class="media-body">
                                         <div class="media-heading">
                                             <div class="name2">
-                                                <a href="">name</a>
-                                                <span class="times">publish-date</span>
+                                                <a href="">{{ userFront.username }}</a>
+                                                <span class="times">{{ article.publish_date }}</span>
                                             </div>
-                                            <a href="">???</a>
+                                            <a href="">{{ article.title }}</a>
 
                                             <p class="abstract">
-                                                publish-content
+                                                {{ article.content }}
                                             </p>
                                         </div>
                                         <div class="footer">
@@ -233,10 +231,10 @@ Personal homepage
 
 
                                                     <li class="active">
-                                                        <a href=""><span class="glyphicon glyphicon-eye-open"></span><b>watch-num</b></a>
+                                                        <a href=""><span class="glyphicon glyphicon-eye-open"></span><b>{{ article.view_count }}</b></a>
                                                     </li>
                                                     <li>
-                                                        <a href=""><span class="glyphicon glyphicon-comment"></span><b>comment-num</b></a>
+                                                        <a href=""><span class="glyphicon glyphicon-comment"></span><b>{{ article.comment.count }}</b></a>
                                                     </li>
                                                     <li>
                                                         <a href=""><span class="glyphicon glyphicon-thumbs-up"></span><b>like-num</b></a>
@@ -250,6 +248,10 @@ Personal homepage
                                     </div>
                                 </div>
                             </li>
+                            {% endfor %}
+
+
+
                         </ul>
                     </div>
                 </div>
@@ -264,7 +266,7 @@ Personal homepage
                     {% endif %}
                 </div>
                 <div class="description">
-                    <div class="js-intro" style="display: block;">{{ user.profile.signature }}</div>
+                    <div class="js-intro" style="display: block;">{{ userFront.profile.signature }}</div>
                 </div>
                 <ul class="list user-dynamic">
                     <li>
