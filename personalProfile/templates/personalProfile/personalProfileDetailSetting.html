@@ -1,0 +1,286 @@
+{% extends "base.html" %}
+
+{% block style %}
+    .setting .row {
+        margin-left: -15px;
+        margin-right: -15px;
+        padding-top:100px;
+
+    }
+    .setting .aside {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        margin: 86px 0 0;
+        padding: 0 0 30px;
+        width: 280px;
+        overflow: auto;
+    }
+    .setting .aside ul {
+        list-style: none;
+
+    }
+    .setting .aside a {
+        padding: 10px 15px;
+        font-size: 20px;
+        display: block;
+    }
+    .setting .aside li {
+        line-height: 25px;
+    }
+    .setting .aside .setting-icon {
+        margin-right: 15px;
+
+        text-align: center;
+        border-radius: 5px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .setting .aside span {
+        vertical-align: middle;
+
+    }
+    .setting .main {
+        padding-left: 0;
+    }
+    .col-xs-offset-8 {
+        margin-left: 33.33333%;
+    }
+    .col-xs-16 {
+        width: 66.66667%;
+    }
+    .setting .main table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+
+    }
+    .setting .main .setting-head {
+        width: 150px;
+    }
+    .setting .main th {
+        text-align: left;
+        padding: 0;
+    }
+    .setting .main tbody {
+        display: table-row-group;
+        vertical-align: middle;
+        border-color: inherit;
+    }
+    .setting .main tr {
+        border-bottom: 1px solid #f0f0f0;
+        display: table-row;
+        vertical-align: inherit;
+
+
+    }
+    .setting .main .setting-verticle {
+        vertical-align: bottom;
+    }
+    .setting .main .setting-title {
+        font-size: 15px;
+        color: #969696;
+    }
+    .setting .main .top-line {
+        padding-top: 10px;
+    }
+    .setting .main td {
+        padding: 20px 0;
+        display: table-cell;
+        vertical-align: inherit;
+
+    }
+    .setting .main input[type=checkbox], input[type=radio] {
+        margin: 4px 0 0;
+        margin-top: 1px\9;
+        line-height: normal;
+    }
+    .setting .main span {
+        margin: 0 20px 0 6px;
+        font-size: 15px;
+        vertical-align: middle;
+    }
+    .top-line input[type=checkbox], input[type=radio] {
+        margin: 4px 0 0;
+        margin-top: 1px\9;
+        line-height: normal;
+    }
+    .setting .main form {
+        margin: 0;
+    }
+    .setting .main form {
+        margin: 0;
+        display:block;
+    }
+    .setting .main textarea {
+        width: 100%;
+        height: 100px;
+        margin-bottom: 10px;
+        padding: 8px 10px;
+        font-size: 15px;
+        border: 1px solid #c8c8c8;
+        border-radius: 4px;
+        background-color: hsla(0,0%,71%,.1);
+        display: block;
+        resize: none;
+        outline-style: none;
+        overflow: auto;
+        color: inherit;
+        font: inherit;
+        margin: 0;
+    }
+    .setting .main .setting-input {
+        line-height: 33px;
+    }
+    .setting .main .information input[name=website] {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .setting .main input[type=text] {
+        padding: 5px 10px;
+        font-size: 15px;
+        border: 1px solid #c8c8c8;
+        border-radius: 4px;
+        background-color: hsla(0,0%,71%,.1);
+    }
+    .setting .main p {
+        margin: 0;
+        padding: 8px 0 0;
+        font-size: 12px;
+        color: #969696;
+        clear: both;
+    }
+    .setting .main .btn-hollow {
+        font-size: 14px;
+    }
+    .btn-hollow {
+        border: 1px solid rgba(59,194,29,.7);
+        color: #42c02e!important;
+    }
+    .btn-hollow {
+        padding: 4px 12px;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: normal;
+        border-radius: 40px;
+        background: none;
+    }
+
+    .setting .main .information .social-bind-list ul{
+        padding-left: 0;
+    }
+    .setting .main .setting-save {
+        width: 100px;
+        margin: 30px 0 60px;
+        border-radius: 20px;
+        border: none;
+    }
+    .setting .main .hide {
+        position: absolute;
+        display: block!important;
+        width: 82px;
+        opacity: 0;
+    }
+    .setting .main .btn-hollow {
+        font-size: 14px;
+    }
+    .btn-hollow {
+        border: 1px solid rgba(59,194,29,.7);
+        color: #42c02e!important;
+    }
+    .setting .main .information .weixin-qrcode img {
+        width: 84px;
+        height: 84px;
+        margin-right: 10px;
+    }
+    .setting .main .information .weixin-qrcode .cancel-bind {
+        display: none;
+        padding-left: 8px;
+        font-size: 12px;
+        color: #969696;
+    }
+
+    .setting .main .information .weixin-qrcode:hover .cancel-bind {
+        display: inline;
+        decolation:none;
+    }
+{% endblock style %}
+
+
+{% block body %}
+<div class="container setting">
+        <div class="row">
+            <div class="aside">
+                <ul>
+                    <li class="router-link-exact-active active">
+                        <a href="{% url 'personalProfile:personalProfileBasicSetting' user.pk %}">
+                            <div class="setting-icon">
+                                <span class="glyphicon glyphicon-th-list"> 基础设置</span>
+                            </div>
+
+                        </a>
+                    </li>
+
+                    <li class="router-link-exact-active active">
+                        <a href="{% url 'personalProfile:personalProfileDetailSetting' user.pk %}">
+                            <div class="setting-icon">
+                                <span class="glyphicon glyphicon-user"> 个人资料</span>
+                            </div>
+
+                        </a>
+                    </li>
+                    <li class="router-link-exact-active active">
+                        <a href="{% url 'personalProfile:personalProfileBackList' user.pk %}">
+                            <div class="setting-icon">
+                                <span class="glyphicon glyphicon-ban-circle"> 黑名单</span>
+                            </div>
+
+                        </a>
+                    </li>
+                    <li class="router-link-exact-active active">
+                        <a href="{% url 'personalProfile:personalProfileReward' user.pk %}">
+                            <div class="setting-icon">
+                                <span class="glyphicon glyphicon-usdglyphicon glyphicon-"> 赞赏设置</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-8 col-md-offset-3 main">
+                <table>
+                    <thead>
+                    <tr>
+                        <th class="setting-head responsive-head"></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody class="base">
+                    <tr>
+                        <td class="top-line">
+                            <div class="avatar">
+                                <img src="头像">
+                            </div>
+                        </td>
+                        <td class="top-line">
+                            <a class="btn btn-hollow">
+                                <input unselectable="on" type="file" class="hide">更改头像
+                            </a>
+                        </td>
+
+                    </tr>
+                    <tr><td class="setting-title">
+                        昵称
+                    </td> <td><input type="text" placeholder="请输入昵称"></td></tr>
+                    <tr><td class="setting-title">电子邮件</td> <td><form><input type="button" value="发送" class="btn btn-hollow pull-right"> <input type="email" placeholder="请输入你的常用邮箱"></form></td></tr>
+                    <tr><td class="setting-title">手机</td> <td class="setted"><div>#手机号码#</div>  <span class="glyphicon glyphicon-ok">已验证</spanclass> <a class="cancel-bind">解除绑定</a></td></tr>
+                    <tr><td class="setting-title setting-verticle">接收谁的动态</td> <td><div class="col-xs-8"><input type="radio" value="true"> <span class="responsive-span">所有人</span></div> <div class="col-xs-16"><input type="radio" value="false"> <span class="responsive-span">我关注的人、我发过信息的人</span></div></td></tr>
+                    <tr><td class="setting-title setting-verticle">提醒邮件通知</td> <td><div class="col-xs-8"><input type="radio" value="instantly"> <span class="responsive-span">所有动态</span></div> <div class="col-xs-11"><input type="radio" value="later"> <span class="responsive-span">每天未读汇总</span></div> <div class="col-xs-5"><input type="radio" value="none"> <span class="responsive-span">不接收</span></div></td></tr>
+                    </tbody>
+                </table>
+                <input type="submit" class="btn btn-success setting-save" value="保存">
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

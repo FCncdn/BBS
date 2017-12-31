@@ -84,3 +84,15 @@ class MySearchView(SearchView):
     def get_queryset(self):
         queryset = super(MySearchView, self).get_queryset()
         return queryset
+
+def personalProfileBasicSetting(request, pk):
+    return render(request,'personalProfile/personalProfileBasicSetting.html',{})
+
+def personalProfileDetailSetting(request, pk):
+    return render(request, 'personalProfile/personalProfileDetailSetting.html',{})
+
+def personalProfileBackList(request, pk):
+    return render(request, 'personalProfile/personalProfileBackListSetting.html',{})
+
+def personalProfileReward(request, pk):
+    return render(request, 'personalProfile/personalProfileRewardSetting.html',{})
