@@ -3,10 +3,14 @@ from django.http import HttpResponseRedirect
 from django.views.generic import DetailView
 from django.contrib.auth.models import User
 from bbs.models import UserProfile
+from bbs.models import Article
 from .forms import personalProfileSettingForm
 from .forms import personalprofileSettingModelForm
+from .forms import MySearchForm
 from .models import FollowShip
-from bbs.models import Article
+from haystack.generic_views import SearchView
+from haystack.query import SearchQuerySet
+from django.http import HttpResponseRedirect
 
 class personalProfileDetail(DetailView):
     #model = get_object_or_404(UserProfile, pk = )
@@ -71,3 +75,12 @@ def personalProfileDynamic(request, pk):
 
 def personalProfileFavourite(request, pk):
     return render(request, 'personalProfile/personalProfileFavourite.html',{})
+
+
+class MySearchView(SearchView):
+    template_name = 'personalProfile/test.html'
+    form_class = MySearchForm
+
+    def get_queryset(self):
+        queryset = super(MySearchView, self).get_queryset()
+        return queryset

@@ -53,8 +53,8 @@
             <li><a href="/">首页</a></li>
             <li><a href="#">分区</a></li>
             <li><a href="#">发帖</a></li>
-            <form class="navbar-form navbar-left">
-              <input type="text" class="form-control" placeholder="搜你想要的">
+            <form class="navbar-form navbar-left" method="GET" action="/search/">
+              <input type="text" class="form-control" placeholder="搜你想要的" name="q">
               <button type = "submit" class = "btn btn-primary">搜索</button>
             </form>
           </ul>
