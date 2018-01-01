@@ -218,16 +218,19 @@ Personal homepage
                                     <li class="active">
                                         <a href=""><span class="glyphicon glyphicon-list-alt"></span>文章</a>
                                     </li>
+                                    <!-- 
                                     <li class>
                                         <a href=""><span class="glyphicon glyphicon-bell"></span>动态</a>
                                     </li>
-
+                                    -->
                                     <li>
                                         <a href=""><span class="glyphicon glyphicon-bookmark"></span>收藏夹</a>
                                     </li>
+                                    <!-- 
                                     <li>
                                         <a href=""><span class="glyphicon glyphicon-fire"></span>热门</a>
                                     </li>
+                                    -->
                                 </ul>
                             </div>
                         </div>
@@ -296,7 +299,15 @@ Personal homepage
                 <div class="title">
                     个人介绍
                     {% if 'edit_profile' in profile_perms %}
-                    <a class="function-btn" href="{% url 'personalProfile:personalProfileDetailSetting' userFront.pk %}"><span class="glyphicon glyphicon-edit"></span>编辑</a>
+                    <a class="function-btn" href="{% url 'personalProfile:personalProfileDetailSetting' userFront.pk %}">
+                        <span class="glyphicon glyphicon-edit"></span>
+                        编辑
+                    </a>
+                    {% else %}
+                    <a class="function-btn" href="{% url 'personalProfile:personalProfileBasic' userFront.pk %}">
+                        <span class="glyphicon glyphicon-edit"></span>
+                        查看
+                    </a>
                     {% endif %}
                 </div>
                 <div class="description">

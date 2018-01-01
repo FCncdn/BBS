@@ -158,7 +158,12 @@ def personalProfileDetailSetting(request, pk):
                   {'form':form, 'userObejct':userObject})
 
 def personalProfileBackList(request, pk):
-    return render(request, 'personalProfile/personalProfileBackListSetting.html',{})
+    template_name = 'personalProfile/personalProfileBackListSetting.html'
+    blacker = BlackList.objects.filter(currentUser__user__pk=pk)
+    context = {
+        'blacker':blacker
+    }
+    return render(request, template_name,context)
 
 def personalProfileReward(request, pk):
     return render(request, 'personalProfile/personalProfileRewardSetting.html',{})
@@ -184,6 +189,30 @@ def personalProfileRedirectBlackList(request, pk):
     currentUser = UserProfile.objects.get(user__pk=pk)
     if is_black:
         is_black.delete()
+        print('***personalProfileRdfirectBlackList')
+        print('delete model success')
     else:
         m_balckList = BlackList(currentUser=request.user.profile, blacker=currentUser)
+        m_balckList.save()
+        print('***personalProfileRdfirectBlackList')
+        print('create model success')
     return HttpResponseRedirect(reverse('personalProfile:personalProfileMain', kwargs={'pk':pk}))
+
+def personalProfileBasic(request, pk):
+    template_name = 'personalProfile/personalProfileBasic.html'
+    user = UserProfile.objects.get(user__pk=pk)
+    profile = [
+        user.name,
+        user.signature,
+        user.phoneNum,
+        user.resume,
+        user.website,
+        user.gender,
+    ]
+    context = {
+        'user':user,
+        'USER':UserProfile._meta.get_fields(),
+        'profile':profile,
+        'pk':pk,
+    }
+    return render(request, template_name,context)
