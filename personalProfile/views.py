@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.views.generic import DetailView
 from django.contrib.auth.models import User
+from django.urls import reverse
 from bbs.models import UserProfile
 from bbs.models import Article
 from .forms import personalProfileSettingForm
@@ -9,9 +10,9 @@ from .forms import detailSettingModelForm
 from .forms import basicSettingModelForm
 from .forms import MySearchForm
 from .models import FollowShip
+from .models import BlackList
 from haystack.generic_views import SearchView
 from haystack.query import SearchQuerySet
-from django.http import HttpResponseRedirect
 
 class personalProfileDetail(DetailView):
     #model = get_object_or_404(UserProfile, pk = )
@@ -25,12 +26,16 @@ class personalProfileDetail(DetailView):
     
     def get_context_data(self, **kwargs):
         context = super(personalProfileDetail, self).get_context_data(**kwargs)
-        #context['user'] = UserProfile
-        context['numFollower'] = FollowShip.objects.filter(follower__pk=self.kwargs['pk']).count()
-        context['numFollowed'] = FollowShip.objects.filter(followed__pk=self.kwargs['pk']).count()
+        is_follow = FollowShip.objects.filter(follower__user__pk=self.request.user.pk)
+        is_follow = is_follow.filter(followed__user__pk=self.kwargs['pk'])
+        is_black = BlackList.objects.filter(currentUser__user__pk=self.request.user.pk)
+        is_black = is_black.filter(blacker__user__pk=self.kwargs['pk'])
+        context['numFollower'] = FollowShip.objects.filter(follower__user__pk=self.kwargs['pk']).count()
+        context['numFollowed'] = FollowShip.objects.filter(followed__user__pk=self.kwargs['pk']).count()
         context['numPost'] = Article.objects.filter(author__pk=self.kwargs['pk']).count()
         context['articles'] = Article.objects.filter(author__pk=self.kwargs['pk'])
-        
+        context['is_follow'] = is_follow
+        context['is_black'] = is_black
         return context
 
 def personalProfileDynamic(request, pk):
@@ -157,3 +162,28 @@ def personalProfileBackList(request, pk):
 
 def personalProfileReward(request, pk):
     return render(request, 'personalProfile/personalProfileRewardSetting.html',{})
+
+def personalProfileRedirectFollow(request, pk):
+    is_follow = FollowShip.objects.filter(follower__user__pk=request.user.pk)
+    is_follow = is_follow.filter(followed__user__pk=pk)
+    currentUser = UserProfile.objects.get(user__pk=pk)
+    if is_follow:
+        is_follow.delete()
+        print('***personalProfileRdfirectFollow')
+        print('delete model success')
+    else:
+        m_follow = FollowShip(follower=request.user.profile, followed=currentUser)
+        m_follow.save()
+        print('***personalProfileRdfirectFollow')
+        print('create model success')
+    return HttpResponseRedirect(reverse('personalProfile:personalProfileMain', kwargs={'pk':pk}))
+
+def personalProfileRedirectBlackList(request, pk):
+    is_black = BlackList.objects.filter(currentUser__user__pk=request.user.pk)
+    is_black = is_black.filter(blacker__user__pk=pk)
+    currentUser = UserProfile.objects.get(user__pk=pk)
+    if is_black:
+        is_black.delete()
+    else:
+        m_balckList = BlackList(currentUser=request.user.profile, blacker=currentUser)
+    return HttpResponseRedirect(reverse('personalProfile:personalProfileMain', kwargs={'pk':pk}))

@@ -6,6 +6,8 @@ from .views import personalProfileBasicSetting
 from .views import personalProfileDetailSetting
 from .views import personalProfileBackList
 from .views import personalProfileReward
+from .views import personalProfileRedirectFollow
+from .views import personalProfileRedirectBlackList
 
 urlpatterns = [
     url(r'^mainPage/$', personalProfileDetail.as_view(), name='personalProfileMain'),
@@ -16,4 +18,6 @@ urlpatterns = [
     url(r'^rewardSettingPage/$', personalProfileReward, name='personalProfileReward'),
     url(r'^dynamicPage/$', personalProfileDynamic, name='personalProfileDynamic'),
     url(r'^favouritePage/$', personalProfileFavourite, name='personalProfileFavourite'),
+    url(r'^redirectFollow/$', personalProfileRedirectFollow, name='psersonalProfileRedirectFollow'),
+    url(r'^redirectBlackList/$', personalProfileRedirectBlackList, name='personalProfileRedirectBlackList'),
 ]
