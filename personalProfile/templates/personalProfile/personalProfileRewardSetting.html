@@ -208,106 +208,91 @@
 
 
 {% block body %}
-<!-- Important -->
-<!-- Can not delete the 'enctype' attribut which is use to handle the upload file -->
-<!-- Only Post method work in the case of handling the upload file -->
+<div class="container">
+        <div class="container setting">
+            <div class="row">
+                <div class="aside">
+                    <ul>
+                        <li class="router-link-exact-active active">
+                            <a href="{% url 'personalProfile:personalProfileBasicSetting' user.pk %}">
+                                <div class="setting-icon">
+                                    <span class="glyphicon glyphicon-th-list"> 基础设置</span>
+                                </div>
+    
+                            </a>
+                        </li>
+    
+                        <li class="router-link-exact-active active">
+                            <a href="{% url 'personalProfile:personalProfileDetailSetting' user.pk %}">
+                                <div class="setting-icon">
+                                    <span class="glyphicon glyphicon-user"> 个人资料</span>
+                                </div>
+    
+                            </a>
+                        </li>
+                        <li class="router-link-exact-active active">
+                            <a href="{% url 'personalProfile:personalProfileBackList' user.pk %}">
+                                <div class="setting-icon">
+                                    <span class="glyphicon glyphicon-ban-circle"> 黑名单</span>
+                                </div>
+    
+                            </a>
+                        </li>
+                        <li class="router-link-exact-active active">
+                            <a href="{% url 'personalProfile:personalProfileReward' user.pk %}">
+                                <div class="setting-icon">
+                                    <span class="glyphicon glyphicon-usdglyphicon glyphicon-"> 赞赏设置</span>
+                                </div>
+    
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-8 col-md-offset-3 main">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="setting-head">
 
-<div class="container setting">
-        <div class="row">
-            <div class="aside">
-                <ul>
-                    <li class="router-link-exact-active active">
-                        <a href="{% url 'personalProfile:personalProfileBasicSetting' user.pk %}">
-                            <div class="setting-icon">
-                                <span class="glyphicon glyphicon-th-list"> 基础设置</span>
-                            </div>
+                                </th>
+                                 <th>
 
-                        </a>
-                    </li>
+                                 </th>
+                            </tr>
+                        </thead>
+                        <tbody class="setting-pay">
+                            <tr>
+                                <td class="setting-title pull-left setting-editor top-line">
+                                    赞赏功能
+                                </td> 
+                                <td class="top-line">
+                                    <div class="col-xs-6">
+                                        <input type="radio" value="true"> 
+                                        <span>开启</span>
+                                    </div> 
+                                    <div class="col-xs-18">
+                                        <input type="radio" value="false"> 
+                                        <span>关闭</span>
+                                    </div> 
+                                    <p>开启后赞赏按钮将出现在你的文章底部</p>
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td class="setting-title pull-left setting-input">
+                                    赞赏描述
+                                </td> 
+                                <td>
+                                    <textarea row="3">
 
-                    <li class="router-link-exact-active active">
-                        <a href="{% url 'personalProfile:personalProfileDetailSetting' user.pk %}">
-                            <div class="setting-icon">
-                                <span class="glyphicon glyphicon-user"> 个人资料</span>
-                            </div>
-
-                        </a>
-                    </li>
-                    <li class="router-link-exact-active active">
-                        <a href="{% url 'personalProfile:personalProfileBackList' user.pk %}">
-                            <div class="setting-icon">
-                                <span class="glyphicon glyphicon-ban-circle"> 黑名单</span>
-                            </div>
-
-                        </a>
-                    </li>
-                    <li class="router-link-exact-active active">
-                        <a href="{% url 'personalProfile:personalProfileReward' user.pk %}">
-                            <div class="setting-icon">
-                                <span class="glyphicon glyphicon-usdglyphicon glyphicon-"> 赞赏设置</span>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-8 col-md-offset-3 main">
-
-                <form action="" method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                <table>
-
-                    <thead>
-                    <tr>
-                        <th class="setting-head responsive-head"></th>
-                        <th></th>
-                    </tr>
-                    </thead>
-
-                    <tbody class="base">
-
-                    {% for field in form %}
-                    <tr>
-                        {% if field.id_for_label == 'id_headImage' %}
-                            {{ field.errors }}
-                            <td class="setting-title">
-                            {{ field.label_tag }}
-                            </td> 
-                            <td>
-                                <img src="{{ user.profile.headImage.url }}" alt="headImage-80" width="80" height="80">
-                            </td>
-                            <td>
-                                {{ field }}
-                            </td>
-                            {% if field.help_text %}
-                            <td>
-                                <p class="help">{{ field.help_text|safe }}</p>    
-                            </td>
-                            {% endif %}
-                        {% else %}
-                            {{ field.errors }}
-                            <td class="setting-title">
-                            {{ field.label_tag }}
-                            </td> 
-                            <td>
-                                {{ field }}
-                            </td>
-                            {% if field.help_text %}
-                            <td>
-                                <p class="help">{{ field.help_text|safe }}</p>    
-                            </td>
-                            {% endif %}
-                        {% endif %}
-                    </tr>
-                    {% endfor %}
-
-                    </tbody>
-                </table>
-                <input type="submit" class="btn btn-success setting-save" value="保存">
-            </form>
-
+                                    </textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table> 
+                    <input type="submit" class="btn btn-success setting-save" value="保存">
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 {% endblock body %}

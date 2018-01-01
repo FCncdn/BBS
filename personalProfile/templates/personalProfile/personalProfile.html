@@ -162,11 +162,12 @@ Personal homepage
 
                     <div class="infor">
                         <ul class="nav navbar-nav">
+                            {% if 'edit_profile' in profile_perms %}
                             <li >
-                                <a class="n-data-a" href="" >关注<p class="n-data-b"></p>{{ numFollowed }}</a>
+                                <a class="n-data-a" href="" >关注<p class="n-data-b"></p>{{ numFollower }}</a>
                             </li>
                             <li>
-                                <a class="n-data-a" href="">粉丝<p class="n-data-b"></p>{{ numFollower }}</a>
+                                <a class="n-data-a" href="">粉丝<p class="n-data-b"></p>{{ numFollowed }}</a>
                             </li>
                             <li>
                                 <a class="n-data-a" href="">帖子<p class="n-data-b"></p>{{ numPost }}</a>
@@ -174,6 +175,39 @@ Personal homepage
                             <li>
                                 <a class="n-data-a" href="">收获喜欢<p class="n-data-b">model.like.num</p></a>
                             </li>
+                            {% else %}
+                            <li >
+                                    <a class="n-data-a" href="" >关注<p class="n-data-b"></p>{{ numFollower }}</a>
+                                </li>
+                                <li>
+                                    <a class="n-data-a" href="">粉丝<p class="n-data-b"></p>{{ numFollowed }}</a>
+                                </li>
+                                <li>
+                                    <a class="n-data-a" href="">帖子<p class="n-data-b"></p>{{ numPost }}</a>
+                                </li>
+                                <li>
+                                    <a class="n-data-a" href="">收获喜欢<p class="n-data-b">model.like.num</p></a>
+                                </li>
+                                <li>
+                                    <a class="n-data-a" href="{% url 'personalProfile:psersonalProfileRedirectFollow' userFront.pk %}">
+                                        {% if is_follow %}
+                                        取消关注
+                                        {% else %}
+                                        关注
+                                        {% endif %}
+                                    </a>
+                                </li>
+                                
+                                <li>
+                                    <a class="n-data-a" href="{% url 'personalProfile:personalProfileRedirectBlackList' userFront.pk %}">
+                                        {% if is_black %}        
+                                        取消拉黑
+                                        {% else %}
+                                        拉黑
+                                        {% endif %}
+                                    </a>
+                                </li>
+                            {% endif %}
                         </ul>
                     </div>
 
@@ -184,16 +218,19 @@ Personal homepage
                                     <li class="active">
                                         <a href=""><span class="glyphicon glyphicon-list-alt"></span>文章</a>
                                     </li>
+                                    <!-- 
                                     <li class>
                                         <a href=""><span class="glyphicon glyphicon-bell"></span>动态</a>
                                     </li>
-
+                                    -->
                                     <li>
                                         <a href=""><span class="glyphicon glyphicon-bookmark"></span>收藏夹</a>
                                     </li>
+                                    <!-- 
                                     <li>
                                         <a href=""><span class="glyphicon glyphicon-fire"></span>热门</a>
                                     </li>
+                                    -->
                                 </ul>
                             </div>
                         </div>
@@ -262,7 +299,15 @@ Personal homepage
                 <div class="title">
                     个人介绍
                     {% if 'edit_profile' in profile_perms %}
-                    <a class="function-btn" href="{% url 'personalProfile:personalProfileSetting' userFront.profile.pk %}"><span class="glyphicon glyphicon-edit"></span>编辑</a>
+                    <a class="function-btn" href="{% url 'personalProfile:personalProfileDetailSetting' userFront.pk %}">
+                        <span class="glyphicon glyphicon-edit"></span>
+                        编辑
+                    </a>
+                    {% else %}
+                    <a class="function-btn" href="{% url 'personalProfile:personalProfileBasic' userFront.pk %}">
+                        <span class="glyphicon glyphicon-edit"></span>
+                        查看
+                    </a>
                     {% endif %}
                 </div>
                 <div class="description">

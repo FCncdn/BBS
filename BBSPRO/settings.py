@@ -47,7 +47,8 @@ INSTALLED_APPS += [
 ]
 #third-party app
 INSTALLED_APPS += [
-    'guardian',
+    'guardian',     #permission
+    'haystack',     #search
 ]
 
 SITE_ID = 1
@@ -142,8 +143,16 @@ MEDIA_URL = '/userUpload/' #随便设置
 #for django_debug_toolbar
 INTERNAL_IPS = {'127.0.0.1'}
 
-#for guardian
+#for permission - guardian
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend', # this is default
     'guardian.backends.ObjectPermissionBackend',
 )
+
+#for search - haystack
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    },
+}

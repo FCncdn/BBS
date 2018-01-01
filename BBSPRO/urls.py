@@ -13,12 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-
+from django.conf import settings
 from django.conf.urls import url,include
+from django.conf.urls.static import static
 from django.contrib import admin
 from bbs import views
-from django.conf import settings
-from django.conf.urls.static import static
+from personalProfile.views import MySearchView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -34,16 +34,26 @@ urlpatterns = [
 
 #custom app
 #personalProfile
+#**********WARNING**********
+#Use User's id and don't use UserProfile's id in template and views
+#**********WARNING**********
 urlpatterns += [
     url(r'^profile/(?P<pk>[0-9]+)/',
         include('personalProfile.urls', namespace='personalProfile', app_name='personalProfile')),
 ]
 
 #for upload file
-#only work on development
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+#third-party app
+#debug_tool_bar - only work on development
 if settings.DEBUG:
     import debug_toolbar
-    urlpatterns = [
+    urlpatterns += [
         url(r'^__debug__/', include(debug_toolbar.urls)),
-    ] + urlpatterns
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    ]
+
+#serch 
+urlpatterns += [
+    url(r'^search/', include('haystack.urls')),
+]

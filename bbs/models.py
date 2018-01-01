@@ -74,12 +74,38 @@ def user_directory_path(instance, filename):
     filename = "headImage.jpg"
     return 'user_{0}/{1}'.format(instance.user.id, filename)
 
-
 class UserProfile(models.Model):
+    #dynamic
+    RECEIVE_ALL_DYNAMIC = 'AL'
+    RECEIVE_FOLLOW_DYNAMIC = 'FL'
+    #email
+    RECEIVE_ALL_EMAIL = 'AM'
+    RECEIVE_UNREAD_EMAIL = 'EM'
+    RECEIVE_NO_EMAIL = 'NM'
+    #gender
+    MAN = 'MN'
+    WOMEN = 'WM'
+    SECRECY = 'SY'
+    RECEIVE_DYNAMIC_CHOICES = (
+        (RECEIVE_ALL_DYNAMIC, '所有人'),
+        (RECEIVE_FOLLOW_DYNAMIC, '关注的人'),
+    )
+    RECEIVE_EMAIL_CHOICES = (
+        (RECEIVE_ALL_EMAIL, '所有邮件'),
+        (RECEIVE_UNREAD_EMAIL, '未读邮件'),
+        (RECEIVE_NO_EMAIL, '不接受'),
+    )
+    GENDER_CHOICES = (
+        (MAN, '男'),
+        (WOMEN, '女'),
+        (SECRECY, '保密'),
+    )
+
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
-        related_name='profile')
+        related_name='profile'
+    )
     # 名字
     name = models.CharField(max_length=32)
     # 属组
@@ -88,18 +114,68 @@ class UserProfile(models.Model):
     signature = models.CharField(max_length=128, default='This guy is too lazy to leave anything here.')
     # 头像
     headImage = models.ImageField(upload_to=user_directory_path ,default='upload_imgs/user-1.jpg')
+    
+    #need regular expression
+    phoneNum = models.CharField(
+        max_length=11, 
+        null=True, 
+        blank=True, 
+        help_text='长号', 
+        verbose_name='手机号码'
+    )
+
+    resume = models.CharField(
+        max_length = 200,
+        null = True,
+        blank = True,
+        help_text = '最多200字',
+        verbose_name = '个人简介',
+    )
+
+    #need regular expression
+    website = models.CharField(
+        max_length = 200,
+        null = True,
+        blank = True,
+        help_text = '输入个人网站',
+        verbose_name = '个人网站'
+    )
+    blackList = models.ForeignKey(
+        User,
+        null = True,
+        blank = True,
+        on_delete=models.CASCADE,
+        related_name='backList'
+    )
+    
+    receive_dynamic = models.CharField(
+        max_length = 2,
+        choices = RECEIVE_DYNAMIC_CHOICES,
+        default=RECEIVE_ALL_DYNAMIC,
+    )
+    receive_email = models.CharField(
+        max_length = 2,
+        choices = RECEIVE_EMAIL_CHOICES,
+        default = RECEIVE_ALL_EMAIL,
+    )
+    gender = models.CharField(
+        max_length=2,
+        choices = GENDER_CHOICES,
+        default = SECRECY,
+    )
 
     def __str__(self):      #__unicode__ in pyhton2
         return self.name
     def get_absolute_url(self):
         return reverse("personalProfile:personalProfileMain", args=[str(self.user.pk)])
+    def is_receive_dynamic_choices(self):
+        return self.receive_dynamic in (self.RECEIVE_ALL_DYNAMIC, self.RECEIVE_FOLLOW_DYNAMIC)
+    def is_receive_email_choices(self):
+        return self.receive_email in (self.RECEIVE_ALL_EMAIL, self.RECEIVE_NO_EMAIL)
     class Meta:
         permissions = (
             ('edit_profile','Edit profile'),
         )
-
-
-
 
 class UserGroup(models.Model):
     name = models.CharField(max_length=64, unique=True)

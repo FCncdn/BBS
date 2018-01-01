@@ -211,8 +211,8 @@
 <!-- Important -->
 <!-- Can not delete the 'enctype' attribut which is use to handle the upload file -->
 <!-- Only Post method work in the case of handling the upload file -->
-
-<div class="container setting">
+<div class="container">
+    <div class="container setting">
         <div class="row">
             <div class="aside">
                 <ul>
@@ -246,44 +246,27 @@
                             <div class="setting-icon">
                                 <span class="glyphicon glyphicon-usdglyphicon glyphicon-"> 赞赏设置</span>
                             </div>
+
                         </a>
                     </li>
                 </ul>
             </div>
             <div class="col-md-8 col-md-offset-3 main">
-
-                <form action="" method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                <table>
-
-                    <thead>
-                    <tr>
-                        <th class="setting-head responsive-head"></th>
-                        <th></th>
-                    </tr>
-                    </thead>
-
-                    <tbody class="base">
-
-                    {% for field in form %}
-                    <tr>
-                        {% if field.id_for_label == 'id_headImage' %}
-                            {{ field.errors }}
-                            <td class="setting-title">
-                            {{ field.label_tag }}
-                            </td> 
-                            <td>
-                                <img src="{{ user.profile.headImage.url }}" alt="headImage-80" width="80" height="80">
-                            </td>
-                            <td>
-                                {{ field }}
-                            </td>
-                            {% if field.help_text %}
-                            <td>
-                                <p class="help">{{ field.help_text|safe }}</p>    
-                            </td>
-                            {% endif %}
-                        {% else %}
+                <form action="" method="POST">
+                        {% csrf_token %}
+                    <table>
+    
+                        <thead>
+                        <tr>
+                            <th class="setting-head responsive-head"></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+    
+                        <tbody class="base">
+    
+                        {% for field in form %}
+                        <tr>
                             {{ field.errors }}
                             <td class="setting-title">
                             {{ field.label_tag }}
@@ -296,15 +279,13 @@
                                 <p class="help">{{ field.help_text|safe }}</p>    
                             </td>
                             {% endif %}
-                        {% endif %}
-                    </tr>
-                    {% endfor %}
-
-                    </tbody>
-                </table>
-                <input type="submit" class="btn btn-success setting-save" value="保存">
-            </form>
-
+                        </tr>
+                        {% endfor %}
+    
+                        </tbody>
+                    </table>
+                    <input type="submit" class="btn btn-success setting-save" value="保存">
+                </form>
             </div>
         </div>
     </div>
