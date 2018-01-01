@@ -34,6 +34,9 @@ urlpatterns = [
 
 #custom app
 #personalProfile
+#**********WARNING**********
+#Use User's id and don't use UserProfile's id in template and views
+#**********WARNING**********
 urlpatterns += [
     url(r'^profile/(?P<pk>[0-9]+)/',
         include('personalProfile.urls', namespace='personalProfile', app_name='personalProfile')),

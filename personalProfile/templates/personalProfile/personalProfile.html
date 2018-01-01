@@ -262,7 +262,7 @@ Personal homepage
                 <div class="title">
                     个人介绍
                     {% if 'edit_profile' in profile_perms %}
-                    <a class="function-btn" href="{% url 'personalProfile:personalProfileSetting' userFront.profile.pk %}"><span class="glyphicon glyphicon-edit"></span>编辑</a>
+                    <a class="function-btn" href="{% url 'personalProfile:personalProfileDetailSetting' userFront.profile.pk %}"><span class="glyphicon glyphicon-edit"></span>编辑</a>
                     {% endif %}
                 </div>
                 <div class="description">

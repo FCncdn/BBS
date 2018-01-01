@@ -35,7 +35,7 @@
             <br>
             <a href="#"><img src="/static/picture/zwei_art.jpg" alt="个人头像" class="img-rounded" style="height:80px; width:80px;"></a>
             <br>
-            <a href="{% url 'personalProfile:personalProfileMain' article_obj.author.pk %}"><h5 align="center">{{ article_obj.author }}</h5></a>
+            <a href="{% url 'personalProfile:personalProfileMain' article_obj.author.user.pk %}"><h5 align="center">{{ article_obj.author }}</h5></a>
         </div>
         <div class="border" style="width:80%; float:left; min-height:150px;">
             <br>
