@@ -25,11 +25,14 @@ urlpatterns = [
     url(r'^$', views.index),
     url(r'^article/(?P<article_id>[0-9]+)$', views.article),
     url(r'^partition/(?P<category_id>[0-9]+)/(?P<page>[0-9]+)/$', views.partition, name='partition'),
-    url(r'^article_post/', views.article_post),
+    #url(r'^article_post/', views.article_post),
+    url(r'^sub_page/', views.sub_page),
     url(r'^login/$', views.login),
     url(r'^acc_login/$', views.acc_login),
     url(r'^logout/$', views.logout_view),
-
+    url(r'^sub_comment/$', views.sub_comment),
+    url(r'^sub_article/$', views.sub_article),
+    url(r'^register/$', views.register_handle, name='register')
 ]
 
 #custom app

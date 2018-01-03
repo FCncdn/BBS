@@ -3,8 +3,6 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
-from django.urls import reverse
-
 
 class Article(models.Model):
     # 标题最大长度255,不能重名
@@ -24,7 +22,7 @@ class Article(models.Model):
     # 帖子的浏览数
     view_count = models.IntegerField(default=0, verbose_name="浏览数")
     # 帖子隐藏
-    def __unicode__(self):
+    def __str__(self):
         return "<%s,author:%s>" % (self.title, self.author)
 
 
@@ -46,7 +44,7 @@ class Comment(models.Model):
     # 这里parent_comment,必须设置为可以为空,因为如果他是第一评论他是没有父ID的
     parent_comment = models.ForeignKey("self", related_name='p_comment', blank=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return "<user:%s>" % (self.user)
 
 
@@ -65,7 +63,7 @@ class Category(models.Model):
     # 板块管理员
     admin = models.ManyToManyField("UserProfile", verbose_name="模块管理员")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -164,7 +162,7 @@ class UserProfile(models.Model):
         default = SECRECY,
     )
 
-    def __str__(self):      #__unicode__ in pyhton2
+    def __str__(self):
         return self.name
     def get_absolute_url(self):
         return reverse("personalProfile:personalProfileMain", args=[str(self.user.pk)])
@@ -180,5 +178,5 @@ class UserProfile(models.Model):
 class UserGroup(models.Model):
     name = models.CharField(max_length=64, unique=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name

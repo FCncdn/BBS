@@ -1,0 +1,224 @@
+{% extends 'basetemp.html' %}
+
+{% block title %}
+注册
+{% endblock %}
+{% block style %}
+        body {
+            color: #666;
+            height: 100%;
+        }
+        html {
+            height: 100%;
+        }
+        .login_top{
+            padding-top:120px;
+            padding-bottom:30px;
+        }
+        .login_logo {
+            margin: 80px;
+        }
+        #masthead {
+
+            text-align: left;
+            background-image: url(/static/picture/p4.png);
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            background-position: center center;
+            background-size: cover;
+            height: 100%;
+        }
+        .login_top{
+            padding-top:120px;
+            padding-bottom:30px;
+        }
+        .r_con {
+            width: 400px;
+        }
+        .fr {
+            float: right;
+        }
+        .reg_title {
+            height: 60px;
+            width: 360px;
+            margin: 10px auto;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .clearfix {
+            zoom: 1;
+        }
+        .reg_title h1 {
+            height: 50px;
+            line-height: 50px;
+            float: left;
+            font-size: 24px;
+            color: #ffffff;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+        }
+        .reg_title a {
+            color: #ffffff;
+            text-align: center;
+            height: 60px;
+            line-height: 60px;
+        }
+        .reg_title p {
+            color: #ffffff;
+            text-align: center;
+            height: 60px;
+            line-height: 60px;
+        }
+        .reg_form {
+            width: 500px;
+            margin: 30px 0 0 30px;
+            float: right;
+            position: relative;
+        }
+        .reg_form ul{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .reg_form li {
+            height: 70px;
+            display: list-item;
+            text-align: -webkit-match-parent;
+        }
+        .reg_form li label {
+            width: 70px;
+            height: 40px;
+            line-height: 40px;
+            float: left;
+            font-size: 14px;
+            color: #ffffff;
+            cursor: default;
+        }
+        .reg_form li input {
+            width: 288px;
+            height: 38px;
+            border: 1px solid #e0e0e0;
+            float: left;
+            outline: none;
+            text-indent: 10px;
+            background-color: #f8f8f8;
+        }
+        .reg_form li .error_tip {
+            float: left;
+            height: 30px;
+            line-height: 30px;
+            color: #e62e2e;
+            display: list-item;
+        }
+        .reg_form li.agreement input {
+            width: 15px;
+            height: 15px;
+            float: left;
+            margin-top: 13px;
+        }
+        .reg_form li.agreement label {
+            width: 300px;
+            float: left;
+            margin-left: 10px;
+        }
+        .reg_form li .error_tip2 {
+            float: left;
+            height: 20px;
+            line-height: 20px;
+            color: #e62e2e;
+            display: none;
+        }
+        .reg_form li.reg_sub input {
+            width: 360px;
+            height: 40px;
+            background-color: #47aa34;
+            font-size: 18px;
+            color: #fff;
+            cursor: pointer;
+        }
+        .bs-example {
+            border-width:0;
+            border-radius: 10px;
+            background-color:rgba(0, 0, 0, 0.15);
+        }
+        .form {
+            width: 360px;
+            height: 100%;
+            margin: 20px auto;
+            position: relative;
+        }
+        .form_input {
+            width: 360px;
+            margin: 20px auto;
+            position: relative;
+        }
+{% endblock %}
+{% block body %}
+<div id="masthead">
+    <div  class="login_top clearfix">
+        <a href="" class="login_logo"><img src="/static/picture/stu-logo-new.png"></a>
+    </div>
+    <div  class="container">
+
+        <div class="reg_form fr">
+            <div class="bs-example">
+            <div class="reg_title clearfix">
+                <h1>用户注册</h1>
+                <p>已有账号？请<a href="/login/">登陆</a></p>
+            </div>
+            <div class="form_input">
+                <form class="form" action="/register/" method="post">
+                    <ul>
+                        <ul>
+                            {% csrf_token %}
+                            <li>
+                                <label>用户名:</label>
+                                <div>{{ form.username }}</div>
+                                <span class="error_tip"> {{ form.username.errors }}</span>
+                            </li>
+                            <li>
+                                <label>密码:</label>
+                                <div>{{ form.password1 }}</div>
+                                <span class="error_tip">{{ form.password1.errors }}</span>
+                            </li>
+                            <li>
+                                <label>确认密码:</label>
+                                <div>{{ form.password2 }}</div>
+                                <span class="error_tip">{{ form.password2.errors }}</span>
+                            </li>
+                            <li>
+                                <label>邮箱:</label>
+                                <div>{{ form.email }}</div>
+                                <span class="error_tip">{{ form.email.errors }}</span>
+                            </li>
+                            <br>
+                            <li class="reg_sub">
+                                <button type="submit" class="btn btn-primary btn-block">注册</button>
+                            </li>
+                        </ul>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../../../static/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../static/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <![endif]-->
+    <script>window.jQuery || document.write('<script src="../../static/js/jquery.min.js"><\/script>')</script>
+    <script src="../../static/js/bootstrap.min.js"></script>
+    <script src="../../static/js/docs.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../static/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="../../static/js/jquery.min.js"></script>
+    <script src="../../static/js/holder.min.js"></script>
+
+{% endblock %}
