@@ -61,7 +61,7 @@ class Category(models.Model):
     # 板块名称
     name = models.CharField(max_length=64, unique=True, verbose_name="板块名称")
     # 板块管理员
-    admin = models.ManyToManyField("UserProfile", verbose_name="模块管理员")
+    admin = models.ManyToManyField("UserProfile", verbose_name="模块管理员", related_name='category')
 
     def __str__(self):
         return self.name
@@ -148,7 +148,6 @@ class UserProfile(models.Model):
         on_delete=models.CASCADE,
         related_name='backList'
     )
-    
     receive_dynamic = models.CharField(
         max_length = 2,
         choices = RECEIVE_DYNAMIC_CHOICES,
@@ -164,6 +163,7 @@ class UserProfile(models.Model):
         choices = GENDER_CHOICES,
         default = SECRECY,
     )
+    isAdmin = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

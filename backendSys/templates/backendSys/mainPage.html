@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+
+{% block style %}
+    .row{
+        margin-top:100px;
+    }
+    .bs-example{
+        border-radius:5px;
+    }
+    body{
+        background-color:#edf1f4;
+    }
+    .managerinfo_1{
+                margin:auto;
+                display:block;
+                text-align:center;
+    }
+    .managerinfo_2{
+        margin-right: 4%;
+        display:inline-flex;
+        float:right;
+        font-size:3px;
+    }
+    .message{
+        margin:auto;
+        display:block;
+    }
+    .messagereply{
+        margin-top:2px;
+    }
+    .text-muted{
+        color:#ffffff;
+    }
+    ul{
+        list-style:none;
+    }
+    h5{
+        margin-left:10%;
+    }
+    P{
+        white-space:pre-wrap;
+        word-wrap:break-word;
+        word-break:break-all;
+    }
+{% endblock style %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="bs-example">
+                <img src = "{{ request.user.profile.headImage.url }}" class = "img-rounded " style="height:80px; width:80px; margin:auto; display:block">
+                <div class="managerinfo_1">
+                    <h6>管理员</h6><h6>{{ request.user.username }}</h6>
+                </div>
+                <br>
+                <div class="managerinfo_2">
+                    <p style="margin-bottom:0px">于{{ admin.time }}入了管理员队伍</p>
+                </div>
+                <br>
+                <hr style="margin-top:2px">
+                <div>
+                    <h5>管理的板块</h5>
+                    <ul>
+                        {% for caty in category %}
+                        <li><a href="{% url 'partition' caty.id 1 %}">{{caty.name}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <hr>
+                <div>
+                    <h5>权限类型</h5>
+                    <ul>
+                        {% for per in permission %}
+                        <li>{{ per }}</li>    
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div>
+                    <h5>管理员列表</h5>
+                    <ul>
+                        {% for member in admins %}
+                        <li>{{ member.admin.user.username }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-9">
+            <div class="bs-example">
+                <div class="container" style="background-color:#ffffff">
+                    <div>
+                        <div class="message" style="width:20%; text-align:center; float:left; min-height:100px;">
+                            <br>
+                            <a href="#"><img src="../static/picture/折木.PNG" alt="个人头像" class="img-circle" style="height:55px; width:55px; margin:auto"></a>
+                            <br>
+                            <br>
+                            <a href="#"><h5 class="message">(用户名)</h5></a>
+                        </div>
+                        <div class="border" style="width:80%; float:left; min-height:100px;">
+                            <p>
+                                说得对！！黄牛活该。
+                            </p>                <!--注意！！！在获取评论时，表达式要紧贴左边线，不要在前面加任何缩进和空格，有的话就删掉-->
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="border" style=" width:80%; float:right">
+                        <h6 style="text-align:right">(时间)</h6>
+                        <a href="" class="text-muted"><h6 style="text-align:right">回复</h6></a>
+                    </div>
+
+                </div>
+                <hr class="messagereply">
+
+                <div class="container" style="background-color:#ffffff">
+                    <div>
+                        <div class="message" style="width:20%; text-align:center; float:left; min-height:100px;">
+                            <br>
+                            <a href="#"><img src="../static/picture/傻东西2.PNG" alt="个人头像" class="img-circle" style="height:55px; width:55px; margin:auto"></a>
+                            <br>
+                            <br>
+                            <a href="#"><h5 class="message">(用户名)</h5></a>
+                        </div>
+                        <div class="border" style="width:80%; float:left; min-height:100px;">
+                            <p>
+                                说得对！！黄牛活该。
+                            </p>                <!--注意！！！在获取评论时，表达式要紧贴左边线，不要在前面加任何缩进和空格，有的话就删掉-->
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="border" style=" width:80%; float:right">
+                        <h6 style="text-align:right">(时间)</h6>
+                        <a href="" class="text-muted"><h6 style="text-align:right">回复</h6></a>
+                    </div>
+
+                </div>
+                <hr class="messagereply">
+
+                <div class="container" style="background-color:#ffffff">
+                    <div>
+                        <div class="message" style="width:20%; text-align:center; float:left; min-height:100px;">
+                            <br>
+                            <a href="#"><img src="../static/picture/傻东西2.PNG" alt="个人头像" class="img-circle" style="height:55px; width:55px; margin:auto"></a>
+                            <br>
+                            <br>
+                            <a href="#"><h5 class="message">(用户名)</h5></a>
+                        </div>
+                        <div class="border" style="width:80%; float:left; min-height:100px;">
+                            <p>
+                                说得对！！黄牛活该。
+                            </p>                <!--注意！！！在获取评论时，表达式要紧贴左边线，不要在前面加任何缩进和空格，有的话就删掉-->
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="border" style=" width:80%; float:right">
+                        <h6 style="text-align:right">(时间)</h6>
+                        <a href="" class="text-muted"><h6 style="text-align:right">回复</h6></a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+
+{% block extraFootJs %}
+    <script>
+        function checkInput() {
+            var input1 = document.getElementById('title');
+            var input2 = document.getElementById('post');
+            if (input1.value.length === 0) {
+                document.getElementById('error1').innerHTML = "标题不能为空！";
+                return false;
+            }
+            else if (input1.value.length > 40){
+                document.getElementById('error1').innerHTML = "标题不能超过40个字";
+                return false;
+            }
+            else {
+                document.getElementById('error1').innerHTML = "";
+                if (input2.value.length >= 30) {
+                    alert('Submited2!');
+                    return true;
+                }
+                else {
+                    document.getElementById('error2').innerHTML = "帖子内容最少输入30个字！";
+                    return false;
+                }
+            }
+        }
+    </script>
+{% endblock extraFootJs %}
