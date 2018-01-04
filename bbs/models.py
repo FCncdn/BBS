@@ -111,7 +111,10 @@ class UserProfile(models.Model):
     # 签名
     signature = models.CharField(max_length=128, default='This guy is too lazy to leave anything here.')
     # 头像
-    headImage = models.ImageField(upload_to=user_directory_path ,default='upload_imgs/user-1.jpg')
+    headImage = models.ImageField(
+        upload_to=user_directory_path ,
+        default='static/picture/zwei_art.jpg'
+    )
     
     #need regular expression
     phoneNum = models.CharField(

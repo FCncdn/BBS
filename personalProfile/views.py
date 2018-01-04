@@ -216,3 +216,23 @@ def personalProfileBasic(request, pk):
         'pk':pk,
     }
     return render(request, template_name,context)
+
+def personalProfileShowFollower(request, pk):
+    template_name = 'personalProfile/personalProfileShowFollower.html'
+    #user = UserProfile.objects.get(user__pk=pk)
+    follower = FollowShip.objects.filter(followed__user__pk=pk)    
+    context = {
+        'follower':follower,
+        'pk':pk,
+    }
+    return render(request, template_name,context)
+
+def personalProfileShowFollowed(request, pk):
+    template_name = 'personalProfile/personalProfileShowFollowed.html'
+    #user = UserProfile.objects.get(user__pk=pk)
+    followed = FollowShip.objects.filter(follower__user__pk=pk)    
+    context = {
+        'followed':followed,
+        'pk':pk,
+    }
+    return render(request, template_name,context)

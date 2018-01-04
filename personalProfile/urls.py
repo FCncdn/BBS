@@ -9,6 +9,8 @@ from .views import personalProfileReward
 from .views import personalProfileRedirectFollow
 from .views import personalProfileRedirectBlackList
 from .views import personalProfileBasic
+from .views import personalProfileShowFollower
+from .views import personalProfileShowFollowed
 
 urlpatterns = [
     url(r'^mainPage/$', personalProfileDetail.as_view(), name='personalProfileMain'),
@@ -22,4 +24,6 @@ urlpatterns = [
     url(r'^favouritePage/$', personalProfileFavourite, name='personalProfileFavourite'),
     url(r'^redirectFollow/$', personalProfileRedirectFollow, name='psersonalProfileRedirectFollow'),
     url(r'^redirectBlackList/$', personalProfileRedirectBlackList, name='personalProfileRedirectBlackList'),
+    url(r'^showFollower/$', personalProfileShowFollower, name='personalProfileShowFollower'),
+    url(r'^showFollowed/$', personalProfileShowFollowed, name='personalProfileShowFollowed'),
 ]

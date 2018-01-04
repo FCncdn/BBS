@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h1>粉丝列表</h1>
+{% for fuser in follower %}
+<a href="{% url 'personalProfile:personalProfileMain' fuser.follower.user.pk %}"><p>{{ fuser.follower.name }}</p></a>
+{% endfor %}
+<a href="{% url 'personalProfile:personalProfileMain' pk %}">back</a>
+
+{% endblock body %}
+

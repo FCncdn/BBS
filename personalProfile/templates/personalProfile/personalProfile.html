@@ -164,10 +164,10 @@ Personal homepage
                         <ul class="nav navbar-nav">
                             {% if 'edit_profile' in profile_perms %}
                             <li >
-                                <a class="n-data-a" href="" >关注<p class="n-data-b"></p>{{ numFollower }}</a>
+                                <a class="n-data-a" href="{% url 'personalProfile:personalProfileShowFollowed' userFront.pk %}" >关注<p class="n-data-b"></p>{{ numFollower }}</a>
                             </li>
                             <li>
-                                <a class="n-data-a" href="">粉丝<p class="n-data-b"></p>{{ numFollowed }}</a>
+                                <a class="n-data-a" href="{% url 'personalProfile:personalProfileShowFollower' userFront.pk %}">粉丝<p class="n-data-b"></p>{{ numFollowed }}</a>
                             </li>
                             <li>
                                 <a class="n-data-a" href="">帖子<p class="n-data-b"></p>{{ numPost }}</a>
@@ -177,10 +177,10 @@ Personal homepage
                             </li>
                             {% else %}
                             <li >
-                                    <a class="n-data-a" href="" >关注<p class="n-data-b"></p>{{ numFollower }}</a>
+                                    <a class="n-data-a" href="{% url 'personalProfile:personalProfileShowFollowed' userFront.pk %}" >关注<p class="n-data-b"></p>{{ numFollower }}</a>
                                 </li>
                                 <li>
-                                    <a class="n-data-a" href="">粉丝<p class="n-data-b"></p>{{ numFollowed }}</a>
+                                    <a class="n-data-a" href="{% url 'personalProfile:personalProfileShowFollower' userFront.pk %}">粉丝<p class="n-data-b"></p>{{ numFollowed }}</a>
                                 </li>
                                 <li>
                                     <a class="n-data-a" href="">帖子<p class="n-data-b"></p>{{ numPost }}</a>
@@ -286,8 +286,6 @@ Personal homepage
                                 </div>
                             </li>
                             {% endfor %}
-
-
 
                         </ul>
                     </div>

@@ -36,7 +36,7 @@
     <div>
         <div class="border" style="width:20%; text-align:center; float:left; min-height:150px;">
             <br>
-            <a href="#"><img src="/static/picture/zwei_art.jpg" alt="个人头像" class="img-rounded" style="height:80px; width:80px;"></a>
+            <a href="#"><img src="{{ article_obj.author.headImage.url }}" alt="个人头像" class="img-rounded" style="height:80px; width:80px;"></a>
             <br>
             <a href="{% url 'personalProfile:personalProfileMain' article_obj.author.user.pk %}"><h5 align="center">{{ article_obj.author }}</h5></a>
         </div>
@@ -97,10 +97,6 @@
                     </a>
                 </li>
                 <li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>                  <!--class="disabled"为不可选取状态，active为已选取（当前页面）状态-->
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
                 <li>
                     <a href="#" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
