@@ -32,8 +32,8 @@ class personalProfileDetail(DetailView):
         is_black = is_black.filter(blacker__user__pk=self.kwargs['pk'])
         context['numFollower'] = FollowShip.objects.filter(follower__user__pk=self.kwargs['pk']).count()
         context['numFollowed'] = FollowShip.objects.filter(followed__user__pk=self.kwargs['pk']).count()
-        context['numPost'] = Article.objects.filter(author__pk=self.kwargs['pk']).count()
-        context['articles'] = Article.objects.filter(author__pk=self.kwargs['pk'])
+        context['numPost'] = Article.objects.filter(author__user__pk=self.kwargs['pk']).count()
+        context['articles'] = Article.objects.filter(author__user__pk=self.kwargs['pk'])
         context['is_follow'] = is_follow
         context['is_black'] = is_black
         return context
