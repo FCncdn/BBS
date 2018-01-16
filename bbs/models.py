@@ -3,18 +3,19 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 class Article(models.Model):
     # 标题最大长度255,不能重名
     title = models.CharField(u'文章标题', max_length=255, unique=True)
     # 发布板块-使用外键关联Category
-    category = models.ForeignKey("Category", verbose_name='板块名称')
+    category = models.ForeignKey("Category", verbose_name='板块名称', on_delete=models.CASCADE)
     # 上传文件
     #head_img = models.ImageField(upload_to="uploads")
     # 文章内容
     content = models.TextField(u"内容")
     # 文章作者
-    author = models.ForeignKey("UserProfile", verbose_name="作者")
+    author = models.ForeignKey("UserProfile", verbose_name="作者", on_delete=models.CASCADE)
     # 发布日期
     publish_date = models.DateTimeField(auto_now=True, verbose_name="发布日期")
     # 帖子的优先级
@@ -32,9 +33,11 @@ class Comment(models.Model):
     # 评论文章
     article = models.ForeignKey(
         "Article",
-        related_name='comment')
+        related_name='comment',
+        on_delete=models.CASCADE,
+    )
     # 评论用户
-    user = models.ForeignKey("UserProfile")
+    user = models.ForeignKey("UserProfile", on_delete=models.CASCADE)
     # 评论内容
     comment = models.TextField(max_length=1000)
     # 评论时间
@@ -42,7 +45,7 @@ class Comment(models.Model):
 
     # 多级评论,是不是评论评论的当前的表(自己表),所以就得和自己做一个关联!
     # 这里parent_comment,必须设置为可以为空,因为如果他是第一评论他是没有父ID的
-    parent_comment = models.ForeignKey("self", related_name='p_comment', blank=True, null=True)
+    parent_comment = models.ForeignKey("self", related_name='p_comment', blank=True, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return "<user:%s>" % (self.user)
@@ -50,9 +53,9 @@ class Comment(models.Model):
 
 class ThumbUp(models.Model):
     # 给哪一个个文章点的
-    article = models.ForeignKey('Article')
+    article = models.ForeignKey('Article', on_delete=models.CASCADE)
     # 用户名
-    user = models.ForeignKey('UserProfile')
+    user = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
     # 时间
     date = models.DateTimeField(auto_now=True)
 

@@ -7,6 +7,7 @@ from .forms import RegisterForm
 from django.contrib import auth
 from django.http import HttpResponseRedirect
 from django_comments.models import Comment
+
 # Create your views here.
 
 
@@ -77,8 +78,12 @@ def partition(request, category_id, page=1):
         previousPage = int(page)-1
     return render_to_response('partition.html', locals())
 
+
 def login(request):
-    return render_to_response('login.html')
+    #return render_to_response('login.html')
+    template_name = 'login.html'
+    context = {}
+    return render(request,template_name,context)
 
 def sub_page(request):
     bbs_category = models.Category.objects.all()
@@ -106,6 +111,7 @@ def sub_article(request):
     )
     return  HttpResponseRedirect('/')
 
+
 def acc_login(request):
     username = request.POST.get('username')
     password = request.POST.get('password')
@@ -114,8 +120,10 @@ def acc_login(request):
         auth.login(request, user)
         response = HttpResponseRedirect('/')
         return response
+        #return render(request, 'index.html',{})
     else:
-        return render_to_response('login.html', {'login_err': 'Wrong username or password!'})
+        #return render_to_response('login.html', {'login_err': 'Wrong username or password!'})
+        return render(request, 'login.html', {'login_err': 'Wrong username or password!'})
 
 def register_handle(request):
 

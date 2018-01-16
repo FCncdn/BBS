@@ -11,7 +11,11 @@ class Choices(models.Model):
 class Administrator(models.Model):
     '''admin model'''
     '''different with superuser'''
-    admin = models.ForeignKey(UserProfile, related_name='admin')
+    admin = models.ForeignKey(
+        UserProfile,
+         related_name='admin',
+         on_delete=models.CASCADE,
+        )
     block = models.ManyToManyField(Choices, related_name='block')
     permission = models.ManyToManyField(Choices, related_name='permission')
     time = models.DateField(auto_now_add=True)

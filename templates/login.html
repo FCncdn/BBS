@@ -176,9 +176,9 @@
                         <p>没有账号？请<a href="/register/">注册</a></p>
                     </div>
                 </div>
-
                 <div class="form_input">
-                    <form id="form-post" onsubmit="return checkInput()" action="/acc_login/" method="post">
+                    <form id="form-post" onsubmit="return checkInput()" action="/acc_login/" method="POST">
+                        {% csrf_token %}
                         <div>
                             <input type="text" class="form-control" id="username" name='username'  class="name_input" placeholder="请输入用户名">
                             <span id="usererror"></span>

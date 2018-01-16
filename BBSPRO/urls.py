@@ -51,3 +51,8 @@ if settings.DEBUG:
 urlpatterns += [
     url(r'^search/', include('haystack.urls')),
 ]
+
+#message - hostman
+urlpatterns += [
+    url(r'^messages/', include('postman.urls', namespace='postman', app_name='postman')),
+]

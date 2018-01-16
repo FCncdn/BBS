@@ -135,7 +135,7 @@ def personalProfileDetailSetting(request, pk):
             request.user.username = form.cleaned_data['username']
             request.user.email = form.cleaned_data['email']
             #baseUser.username = form.cleaned_data['username']
-            #userObject.signature = form.cleaned_data['signature']
+            userObject.signature = form.cleaned_data['signature']
             userObject.phoneNum = form.cleaned_data['phoneNum']
             userObject.receive_dynamic = form.cleaned_data['receive_dynamic']
             userObject.receive_email = form.cleaned_data['receive_email']
@@ -153,6 +153,7 @@ def personalProfileDetailSetting(request, pk):
             'phoneNum':userObject.phoneNum,
             'receive_dynamic':userObject.receive_dynamic,
             'receive_email':userObject.receive_email,
+            'signature':userObject.signature,
             })
     return render(request, 'personalProfile/personalProfileDetailSetting.html',
                   {'form':form, 'userObejct':userObject})
