@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 INSTALLED_APPS += [
     'personalProfile',
     'backendSys',
+    'messageSys',
 ]
 #third-party app
 INSTALLED_APPS += [

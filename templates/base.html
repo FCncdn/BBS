@@ -84,6 +84,8 @@
             </li>
 
             <!-- notification -->
+            {% load postman_tags %}
+            {% postman_unread as unread_count %}
             <li class="dropdown" >
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><!--span class="glyphicon glyphicon-bell"></span-->消息提醒<span class="caret"></span></a>
               <ul class="dropdown-menu" style = "text-align:center">
@@ -94,8 +96,8 @@
                 </li>
                 <li role="separator" class="divider"></li>
                 <li>
-                  <a href="#">悄悄话
-                    <span class = "badge">5</span>                <!--12、5、19 为评论回复数和悄悄话数显示，由badge类实现-->
+                  <a href="{% url 'postman:inbox' %}">悄悄话
+                    <span class = "badge">{{ unread_count }}</span>                <!--12、5、19 为评论回复数和悄悄话数显示，由badge类实现-->
                   </a>
                 </li>
                 <li role = "seperator" class = "divider"></li>
@@ -106,7 +108,6 @@
                 </li>
               </ul>
             </li>
-
           </ul>
           {%else%}
           <ul class="nav navbar-nav navbar-right">

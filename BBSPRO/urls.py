@@ -36,6 +36,12 @@ urlpatterns += [
         include('backendSys.urls', namespace='backendSys', app_name='backendSys')),
 ]
 
+#message system
+urlpatterns += [
+    url(r'^messageSys/',
+        include('messageSys.urls', namespace='postman', app_name='postman')),
+]
+
 #for upload file
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
@@ -50,9 +56,4 @@ if settings.DEBUG:
 #serch 
 urlpatterns += [
     url(r'^search/', include('haystack.urls')),
-]
-
-#message - hostman
-urlpatterns += [
-    url(r'^messages/', include('postman.urls', namespace='postman', app_name='postman')),
 ]
