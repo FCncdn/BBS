@@ -15,6 +15,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+ROOT_URLCONF = 'password_reset.tests.urls'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django_comments',
     'debug_toolbar',
+    'captcha'
 ]
 #custom app
 INSTALLED_APPS += [
@@ -118,6 +120,16 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.qq.com'                       #SMTP地址 例如: smtp.163.com
+EMAIL_PORT = 25                       #SMTP端口 例如: 25
+EMAIL_HOST_USER = '468458093@qq.com'                  #qq的邮箱 例如: xxxxxx@163.com
+EMAIL_HOST_PASSWORD = 'uhpvtjxfyrlobgig'              #我的邮箱密码 例如  xxxxxxxxx
+EMAIL_SUBJECT_PREFIX = u'django'       #为邮件Subject-line前缀,默认是'[django]'
+EMAIL_USE_TLS = True                  #与SMTP服务器通信时，是否启动TLS链接(安全链接)。默认是false
+EMAIL_FROM="468458093@qq.com"
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
@@ -159,6 +171,10 @@ HAYSTACK_CONNECTIONS = {
         'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
     },
 }
+
+
+
+
 
 #for hostman
 #TEMPLATE_CONTEXT_PROCESSORS = postman.context_processors.inbox

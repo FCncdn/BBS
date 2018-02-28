@@ -17,7 +17,15 @@ urlpatterns = [
     url(r'^logout/$', views.logout_view),
     url(r'^sub_comment/$', views.sub_comment),
     url(r'^sub_article/$', views.sub_article),
-    url(r'^register/$', views.register_handle, name='register')
+    url(r'^register/$', views.register_handle, name='register'),
+    url(r'^captcha', include('captcha.urls')),
+    url(r'^forget/$',views.forget),
+    url(r'^resetpwd_acc',views.resetpwd_acc),
+    url(r'^reset/(?P<active_code>.*)',views.reset),
+    url(r'^inputpwd/$',views.inputpwd),
+    #url(r'^(?P<active_code>.*)')
+
+
 ]
 
 #custom app

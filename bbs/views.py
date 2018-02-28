@@ -3,11 +3,15 @@ from __future__ import unicode_literals
 from django.http import HttpResponse
 from django.shortcuts import render_to_response,render,redirect
 from . import models
-from .forms import RegisterForm
+from .forms import RegisterForm,LoginForm,ForgetForm,ResetForm
 from django.contrib import auth
 from django.http import HttpResponseRedirect
-from django_comments.models import Comment
-
+from django.contrib.auth.models import User
+#from django_comments.models import Commentfrom
+from django.contrib.auth.hashers import make_password
+from captcha.fields import CaptchaField
+from bbs.email_send import send_email
+from .models import EmailVerifyRecord
 # Create your views here.
 
 
@@ -79,11 +83,7 @@ def partition(request, category_id, page=1):
     return render_to_response('partition.html', locals())
 
 
-def login(request):
-    #return render_to_response('login.html')
-    template_name = 'login.html'
-    context = {}
-    return render(request,template_name,context)
+
 
 def sub_page(request):
     bbs_category = models.Category.objects.all()
@@ -95,6 +95,7 @@ def logout_view(request):
     auth.logout(request)
     response = HttpResponse("<b>%s</b> Logged out! <br/><a href='/login/'>Re-Login</a>" % user)
     return response
+
 
 
 def sub_article(request):
@@ -112,32 +113,99 @@ def sub_article(request):
     return  HttpResponseRedirect('/')
 
 
+def login(request):
+    form=LoginForm()
+    #return render_to_response('login.html')
+    template_name = 'login.html'
+    context = {}
+    return render(request,template_name,{"form":form})
+
 def acc_login(request):
-    username = request.POST.get('username')
-    password = request.POST.get('password')
-    user = auth.authenticate(username=username, password=password)
-    if user is not None:
-        auth.login(request, user)
-        response = HttpResponseRedirect('/')
-        return response
+    form=LoginForm(request.POST)
+    if form.is_valid():
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = auth.authenticate(username=username, password=password)
+        if user is not None:
+            auth.login(request, user)
+            response = HttpResponseRedirect('/')
+            return response
         #return render(request, 'index.html',{})
-    else:
+        else:
         #return render_to_response('login.html', {'login_err': 'Wrong username or password!'})
-        return render(request, 'login.html', {'login_err': 'Wrong username or password!'})
+            return render(request, 'login.html', {'form':form,'login_err': 'Wrong username or password!'})
+    else:
+        return render(request, 'login.html', {'form': form})
 
 def register_handle(request):
-
     if request.method == 'POST':
         form = RegisterForm(request.POST)
-
+        email=request.POST.get('email')
         if form.is_valid():
-
+            if User.objects.filter(email=email):
+                return render(request, 'registration/register.html',context={'msg':'邮箱已经存在'})
             form.save()
-
-            return redirect('/')
+            return redirect('/login/')
     else:
         form = RegisterForm()
     return render(request, 'registration/register.html',context={'form': form})
 
 def register(request):
-    return render(request, 'registration/register.html')
+    form = RegisterForm()
+    return render(request, 'registration/register.html',{"form":form})
+
+def forget(request):
+    form=ForgetForm()
+    return render(request, 'registration/resetpwd.html',{"form":form})
+
+def resetpwd_acc(request):
+    form = ForgetForm(request.POST)
+    if form.is_valid():
+        email=request.POST.get("email","")
+        if User.objects.filter(email=email):
+            send_email(email,'forget')
+            return render(request, 'registration/send_succ.html',{})
+        else:
+            return render(request, 'registration/resetpwd.html', {"msg": "邮箱不存在"})
+    else:
+        return render(request, 'registration/resetpwd.html', {"form": form})
+
+
+
+def reset(request,active_code):
+        form=LoginForm()
+        all_records = EmailVerifyRecord.objects.filter(code=active_code)
+        if all_records:
+            for record in all_records:
+                # 重置密码的用户
+                email = record.email
+                return render(request, "registration/inputpwd.html", {"email": email})
+        else:
+            return render(request, 'registration/active_fail.html')
+        return render(request, "login.html",{"form":form})
+
+
+
+def inputpwd(request):
+    form=ResetForm(request.POST)
+    form1=LoginForm()
+    email = request.POST.get("email")
+    if not email:
+        return render(request,'login.html',{"form":form1})
+    #return render(request,"test.html",{"email":email})
+    if form.is_valid():
+        pwd1=request.POST.get("pwd1")
+        pwd2=request.POST.get("pwd2")
+        if pwd1 != pwd2:
+            return render(request, "registration/inputpwd.html", {"email": email,"msg":"两次密码不一致"})
+        user = User.objects.get(email=email)
+        user.set_password(pwd1)
+        user.save()
+        return render(request,"login.html",{"email":email,"form":form1})
+    else:
+        return render(request, "registration/inputpwd.html", {"email": email, "form": form})
+
+
+
+
+
