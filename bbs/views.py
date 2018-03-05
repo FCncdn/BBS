@@ -123,7 +123,7 @@ def acc_login(request):
         #return render(request, 'index.html',{})
     else:
         #return render_to_response('login.html', {'login_err': 'Wrong username or password!'})
-        return render(request, 'login.html', {'login_err': 'Wrong username or password!'})
+        return render(request, 'login.html', {'login_err': '用户名或密码错误!'})
 
 def register_handle(request):
 
