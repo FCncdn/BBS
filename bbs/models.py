@@ -4,24 +4,6 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
-from datetime import datetime
-# 邮箱验证码model
-class EmailVerifyRecord(models.Model):
-    code = models.CharField(max_length=20, verbose_name=u"验证码")
-    email = models.EmailField(max_length=50, verbose_name=u"邮箱")
-    send_type = models.CharField(verbose_name=u'验证码类型', choices=(("forget", u"找回密码"),
-                                                                ("update_email", u"修改邮箱" )), max_length=15)
-    # now加括号会根据model生成时的时间，不加括号会根据生成实例的时间
-    send_time = models.DateTimeField(verbose_name=u'发送时间', default=datetime.now)
-
-    class Meta:
-        verbose_name = u"邮箱验证码"
-        verbose_name_plural = verbose_name
-
-    def __str__(self):
-        return '{0}({1})'.format(self.code, self.email)
-
-
 
 class Article(models.Model):
     # 标题最大长度255,不能重名
