@@ -1,8 +1,8 @@
-{% extends "base.html" %}
+{% extends "basetemp.html" %}
 
 {% block style %}
     .row{
-        margin-top:100px;
+        margin-top:70px;
     }
     .bs-example{
         border-radius:5px;
@@ -42,6 +42,28 @@
         word-wrap:break-word;
         word-break:break-all;
     }
+        #repinside {
+            width:80%;
+            padding-top:0;
+            margin-left:20%;
+        }
+        #reply{
+            margin:0px 0px 10px auto;
+            width:80%;
+            resize:none;
+        }
+        #repbtn{
+            margin:0px 0px 7px auto;
+            position:relative;
+            left:93%;
+        }
+        span#error1 {
+            float:left;
+            color:#d43f3a;
+            display:inline-flex;
+            margin:0px 60% 0px 20.5%;
+            font-size:13px;
+        }
 {% endblock style %}
 
 {% block body %}
@@ -89,18 +111,82 @@
         </div>
         <div class="col-md-9">
             <div class="bs-example">
-                <div class="container" style="background-color:#ffffff">
+                <div class="container" style="background-color:#ffffff">  <!-- 管理员消息提醒-->
                     <div>
                         <div class="message" style="width:20%; text-align:center; float:left; min-height:100px;">
                             <br>
-                            <a href="#"><img src="../static/picture/折木.PNG" alt="个人头像" class="img-circle" style="height:55px; width:55px; margin:auto"></a>
+                            <a href="#"><img src="../../../static/picture/折木.PNG" alt="个人头像" class="img-circle" style="height:55px; width:55px; margin:auto"></a>
                             <br>
                             <br>
                             <a href="#"><h5 class="message">(用户名)</h5></a>
                         </div>
                         <div class="border" style="width:80%; float:left; min-height:100px;">
                             <p>
-                                说得对！！黄牛活该。
+说得对！！黄牛活该。
+                            </p>                <!--注意！！！在获取评论时，表达式要紧贴左边线，不要在前面加任何缩进和空格，有的话就删掉-->
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="border" style=" width:80%; float:right">
+                        <h6 style="text-align:right">(时间)</h6>
+                        <a href="" id="replink" class="text-muted" value="hidden" onclick="return clickreplink()"><h6 style="text-align:right">回复</h6></a>
+                    </div>
+                </div>
+
+                <div id="repinside" class="bs-example">         <!--楼中楼回复起始-->
+                    <div>
+                        <div class="message" style="width:15%; min-height:60px; text-align:center; margin:auto; float:left">
+                            <br>
+                            <a href="#"><img src="../../../static/picture/zwei_art.jpg" alt="个人头像" class="img-circle" style="height:45px; width:45px; margin:auto"></a>
+                            <br>
+                            <br>
+                            <a href="#"><h6 class="message">(用户名)</h6></a>
+                        </div>
+                        <div class="border" style="width:65%; min-height:60px;">
+                            <p>
+是的。
+                            </p>                <!--注意！！！在获取评论时，表达式要紧贴左边线，不要在前面加任何缩进和空格，有的话就删掉-->
+                        </div>
+                    </div>
+                    <br>
+                    <div class="border" style=" width:60%; float:right">
+                        <h6 style="text-align:right">(时间)</h6>
+                        <a href="" id="replink2" class="text-muted" value="hidden" onclick="return clickreplink()"><h6 style="text-align:right">回复</h6></a>
+                    </div>
+                    <br>
+                    <br>
+                    <hr>
+
+                </div> <!-- 楼中楼回复的bs-example-->
+
+                <div id="reparea" style="display:none">
+                    <form id="form-post" onsubmit="return checkInput()" method="post">
+                            <textarea rows="3" class="form-control" id="reply" placeholder="回复"></textarea>
+
+                            <div style="width:10%; margin:5px 4px 0px 0px; display:inline">
+                                <span id="error1"></span>
+                            </div>
+                            <br>
+                            <button type="submit" id="repbtn" class="btn btn-default">回复</button>
+                    </form>
+                </div>
+
+
+                <hr class="messagereply">
+
+                <div class="container" style="background-color:#ffffff">
+                    <div>
+                        <div class="message" style="width:20%; text-align:center; float:left; min-height:100px;">
+                            <br>
+                            <a href="#"><img src="../../../static/picture/傻东西2.PNG" alt="个人头像" class="img-circle" style="height:55px; width:55px; margin:auto"></a>
+                            <br>
+                            <br>
+                            <a href="#"><h5 class="message">(用户名)</h5></a>
+                        </div>
+                        <div class="border" style="width:80%; float:left; min-height:100px;">
+                            <p>
+说得对！！黄牛活该。
                             </p>                <!--注意！！！在获取评论时，表达式要紧贴左边线，不要在前面加任何缩进和空格，有的话就删掉-->
                         </div>
                     </div>
@@ -118,14 +204,14 @@
                     <div>
                         <div class="message" style="width:20%; text-align:center; float:left; min-height:100px;">
                             <br>
-                            <a href="#"><img src="../static/picture/傻东西2.PNG" alt="个人头像" class="img-circle" style="height:55px; width:55px; margin:auto"></a>
+                            <a href="#"><img src="../../../static/picture/傻东西2.PNG" alt="个人头像" class="img-circle" style="height:55px; width:55px; margin:auto"></a>
                             <br>
                             <br>
                             <a href="#"><h5 class="message">(用户名)</h5></a>
                         </div>
                         <div class="border" style="width:80%; float:left; min-height:100px;">
                             <p>
-                                说得对！！黄牛活该。
+说得对！！黄牛活该。
                             </p>                <!--注意！！！在获取评论时，表达式要紧贴左边线，不要在前面加任何缩进和空格，有的话就删掉-->
                         </div>
                     </div>
@@ -135,32 +221,7 @@
                         <h6 style="text-align:right">(时间)</h6>
                         <a href="" class="text-muted"><h6 style="text-align:right">回复</h6></a>
                     </div>
-
                 </div>
-                <hr class="messagereply">
-
-                <div class="container" style="background-color:#ffffff">
-                    <div>
-                        <div class="message" style="width:20%; text-align:center; float:left; min-height:100px;">
-                            <br>
-                            <a href="#"><img src="../static/picture/傻东西2.PNG" alt="个人头像" class="img-circle" style="height:55px; width:55px; margin:auto"></a>
-                            <br>
-                            <br>
-                            <a href="#"><h5 class="message">(用户名)</h5></a>
-                        </div>
-                        <div class="border" style="width:80%; float:left; min-height:100px;">
-                            <p>
-                                说得对！！黄牛活该。
-                            </p>                <!--注意！！！在获取评论时，表达式要紧贴左边线，不要在前面加任何缩进和空格，有的话就删掉-->
-                        </div>
-                    </div>
-                    <br>
-                    <br>
-                    <div class="border" style=" width:80%; float:right">
-                        <h6 style="text-align:right">(时间)</h6>
-                        <a href="" class="text-muted"><h6 style="text-align:right">回复</h6></a>
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -170,28 +231,30 @@
 
 {% block extraFootJs %}
     <script>
-        function checkInput() {
-            var input1 = document.getElementById('title');
-            var input2 = document.getElementById('post');
-            if (input1.value.length === 0) {
-                document.getElementById('error1').innerHTML = "标题不能为空！";
-                return false;
-            }
-            else if (input1.value.length > 40){
-                document.getElementById('error1').innerHTML = "标题不能超过40个字";
+    function checkInput () {
+        var input = document.getElementById("reply");
+        if (input.value.length === 0) {
+            document.getElementById("error1").innerHTML = "回复内容不能为空!";
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    function clickreplink () {
+        var ondiv = document.getElementById("reparea");
+            if (ondiv.style.display == "none") {
+                ondiv.style.display = "inline";
+                this.value = "display";
                 return false;
             }
             else {
-                document.getElementById('error1').innerHTML = "";
-                if (input2.value.length >= 30) {
-                    alert('Submited2!');
-                    return true;
-                }
-                else {
-                    document.getElementById('error2').innerHTML = "帖子内容最少输入30个字！";
-                    return false;
-                }
+                ondiv.style.display = "none";
+                this.value = "hidden";
+                return false;
             }
-        }
+    }
+
+
     </script>
 {% endblock extraFootJs %}

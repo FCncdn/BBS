@@ -51,7 +51,7 @@ tinymce.init({
         <br>
 
         <div class="container">
-            <form method="post" action="/sub_article/" onsubmit="return checkInput()">
+            <form method="post" action="/sub_article/" onsubmit="return checkInput()" enctype="multipart/form-data">
                 <div class="form-group" style="width:30%">
                     <label for="partition">板块分区</label>
                     <select class="form-control" id="partition" name="category">
@@ -62,6 +62,12 @@ tinymce.init({
                 </div>
                 <br>
                 <br>
+            <label>附件上传</label>
+                <input name="file" type="file" accept="" />
+                <input name="token" type="hidden" />
+            <br>
+            <br>
+            <br>
                 <div class="form-group">
                     <label for="title">标题</label>
                     <input type="text" class="form-control" id="title" placeholder="请输入标题" name="title">

@@ -15,6 +15,9 @@
             textarea{
             resize:none;
         }
+        body {
+            background-color:#edf1f4;
+        }
         span#error {
             color: #d43f3a;
         }
@@ -48,6 +51,7 @@
         </div>
     </div>
 
+
     <hr>
 
     <br>
@@ -55,14 +59,16 @@
     <div class="border" style=" width:100%; float:left">
         <h6 style="text-align:right">{{ article_obj.publish_date }}</h6>
     </div>
-        <br>
-        <br>
+    <div style="text-align:right;">
+        <a href="" id="like" style="display:inline" onclick="return likebtn()"><span class="glyphicon glyphicon-heart-empty"><b> 收藏</b></span></a>
+        <a href="" id="dislike" style="display:none" onclick="return likebtn()"><span class="glyphicon glyphicon-heart"><b> 已收藏</b></span></a>
+    </div>
 
 </div><!--container-->
 
 {%for comment in comment_list%}
   <div class="container" style="background-color:#ffffff">
-    <hr>
+    <hr style="margin-top:10px">
     <div>
         <div class="border" style="width:20%; text-align:center; float:left; min-height:150px;">
             <br>
@@ -72,7 +78,7 @@
         </div>
         <div class="border" style="width:80%; float:left; min-height:150px;">
 <p>
-    {{comment.comment|safe}}
+{{comment.comment|safe}}
 </p>                <!--注意！！！在获取评论时，表达式要紧贴左边线，不要在前面加任何缩进和空格，有的话就删掉-->
         </div>
     </div>
@@ -139,6 +145,21 @@ tinymce.init({
             return true;
         }
 
+    }
+
+    function likebtn() {
+        var islike = document.getElementById('like');
+        var isdislike = document.getElementById('dislike');
+        if (islike.style.display !== "none") {
+            islike.style.display = "none";
+            isdislike.style.display = "inline";
+            return false;
+        }
+        else {
+            islike.style.display = "inline";
+            isdislike.style.display = "none";
+            return false;
+        }
     }
 </script>
 
